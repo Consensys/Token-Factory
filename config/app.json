@@ -1,0 +1,27 @@
+{
+  "build": {
+    "index.html": "index.html",
+    "app.js": [
+      "../node_modules/react/dist/react.js",
+      "../node_modules/react-router/umd/ReactRouter.js",
+      "../node_modules/react-dom/dist/react-dom.js",
+      "../node_modules/history/umd/History.js",
+      "javascripts/app.js",
+      "javascripts/main.jsx",
+      "javascripts/frontpage.jsx"
+    ],
+    "app.css": [
+      "stylesheets/app.css"
+    ],
+    "images/": "images/"
+  },
+  "deploy": [
+    "Standard_Token",
+    "Standard_Token_Factory"
+  ],
+  "rpc": {
+    // Default RPC configuration.
+    "host": "localhost",
+    "port": 8545
+  }
+}
