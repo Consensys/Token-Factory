@@ -11,8 +11,9 @@ var TokenSearchPage = React.createClass({
     return (
       <div>
         Enter Address of Token System: <br />
-          <input type="text" value={this.state.value} placeholder="0xdeadbeef..." onChange={this.handleChange}/>
-          <button onClick={this.executeFunction}>Go to Token</button>
+        <br />
+        <input type="text" value={this.state.value} placeholder="0xdeadbeef..." onChange={this.handleChange}/>
+        <button onClick={this.executeFunction}>Go to Token</button>
       </div>
     );
   },
