@@ -8,6 +8,10 @@
       "../node_modules/history/umd/History.js",
       "javascripts/app.js",
       "javascripts/main.jsx",
+      "javascripts/navbar.jsx",
+      "javascripts/tokenpage.jsx",
+      "javascripts/tokensearchpage.jsx",
+      "javascripts/factorypage.jsx",
       "javascripts/frontpage.jsx"
     ],
     "app.css": [

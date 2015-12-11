@@ -1,10 +1,8 @@
 var FrontPage = React.createClass({
   render: function() {
-    console.log('rendering');
     return (
       <div>
-            Bing, badda boom. Bop, boom, pow. Token frontpage/dashboard to go here.
-            Rapid iteration from here on.
+        <Link to={'/tokensearch'}>Interact with a Token System</Link>
       </div>
     );
   }
