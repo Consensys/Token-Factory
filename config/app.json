@@ -9,6 +9,7 @@
       "javascripts/app.js",
       "javascripts/transferform.jsx",
       "javascripts/approveform.jsx",
+      "javascripts/unapproveform.jsx",
       "javascripts/balanceofform.jsx",
       "javascripts/main.jsx",
       "javascripts/navbar.jsx",
