@@ -4,11 +4,11 @@
   "version": "0.0.1",
   "description": "Token Factory",
   "dependencies": {
-    "react": "^0.14.3",
-    "react-dom": "0.14.3",
+    "react": "^0.13.x",
+    "reflux-tx": "0.1.1",
     "react-router": "^1.0.1",
     "web3": "git://github.com/ethereum/web3.js#0.15.0",
-    "history": "~1.15.0"
+    "history": "1.13.x"
   },
   "devDependencies": {
     "async": "*",

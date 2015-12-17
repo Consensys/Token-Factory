@@ -4,10 +4,11 @@
     "app.js": [
       "../node_modules/react/dist/react.js",
       "../node_modules/react-router/umd/ReactRouter.js",
-      "../node_modules/react-dom/dist/react-dom.js",
+      "../node_modules/reflux-tx/dist/refluxTX.js",
       "../node_modules/history/umd/History.js",
       "javascripts/app.js",
       "javascripts/transferform.jsx",
+      "javascripts/createtokenform.jsx",
       "javascripts/approveform.jsx",
       "javascripts/unapproveform.jsx",
       "javascripts/balanceofform.jsx",
