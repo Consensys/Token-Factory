@@ -7,8 +7,6 @@ var CreateTokenForm = React.createClass({
       //createTx_hash: '',
     };
   },
-  componentDidMount: function() {
-  },
   componentDidUpdate: function() {
     //first props are passed only after it mounted.
     if(this.state.creating == true) {
@@ -41,7 +39,7 @@ var CreateTokenForm = React.createClass({
     //for now, deployed separately, until factory is online.
     //thus users must remember their addresses (for now).
     var ST = web3.eth.contract(Standard_Token.abi);
-    var tx_hash = ST.new(this.state.value, {from: web3.eth.accounts[0]});
+    var tx_hash = ST.new(this.state.value, {from: web3.eth.accounts[0], data: Standard_Token.binary});
 
     TXActions.add({hash: tx_hash.transactionHash, txType: "token_creation"});
     this.setState({creating: true});

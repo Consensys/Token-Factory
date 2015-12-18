@@ -18,7 +18,9 @@ var TokenPage = React.createClass({
         <br />
         Basic Functions: <br />
         <br />
-        <TransferForm address = {this.props.params.address} /> <br />
+        <TXComponent filter={{txType: "transfer"}}>
+          <TransferForm contractAddress = {this.props.params.address} />
+        </TXComponent> <br />
         <ApproveForm /> <br />
         <UnapproveForm /> <br />
         <BalanceOfForm /> <br />
