@@ -49,12 +49,16 @@ var CreateTokenForm = React.createClass({
   },
   render: function() {
     //return error if not actual token system.
+    if(this.state.creating == true) {
+      var creatingToken = <div>Creating Token...</div>;
+    }
     return (
       <div>
         Enter the amount, the creator will receive: <br />
         <br />
         <input type="text" value={this.state.value} placeholder="eg 10000" onChange={this.handleChange}/>
         <button disabled={this.state.creating} onClick={this.executeFunction}>Create Token</button>
+        {creatingToken}
       </div>
     );
   }
