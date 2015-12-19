@@ -1,5 +1,7 @@
 //currently uses modified reflux-tx & modified ethersim to work.
 //also moved to react 0.13 (history 1.13 & removed reactdom) for reflux-tx to work.
+//NOTE: The code uses a combo of promises + reflux-tx store.
+//For call it uses promise, but for normal transactions it uses the store.
 window.Route = ReactRouter.Route;
 window.Router = ReactRouter.Router;
 window.IndexRoute = ReactRouter.IndexRoute;
