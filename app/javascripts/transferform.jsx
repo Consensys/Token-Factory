@@ -5,13 +5,7 @@ var TransferForm = React.createClass({
       transferHash: '',
       toAddress: '',
       transferAmount: 0,
-      st_ctr: ''
     };
-  },
-  componentDidMount: function() {
-    var create_st_ctr = web3.eth.contract(Standard_Token.abi);
-    var st_ctrr = create_st_ctr.at(this.props.contractAddress);
-    this.setState({st_ctr: st_ctrr});
   },
   componentDidUpdate: function() {
     //first props are passed only after it mounted.
@@ -22,8 +16,7 @@ var TransferForm = React.createClass({
           this.setState({transferring: false});
           //signal SENT
           console.log('transferred');
-          var testC = Standard_Token.at(this.props.contractAddress);
-          testC.balanceOf.call(web3.eth.accounts[1]).then(function(result) {
+          this.props.pudding_token.balanceOf.call(web3.eth.accounts[1]).then(function(result) {
             console.log('balance');
             console.log(result);
           });
@@ -50,7 +43,7 @@ var TransferForm = React.createClass({
     console.log(this.state.toAddress);
 
     //check validity of inputs
-    var tx_hash = this.state.st_ctr.transfer(this.state.toAddress, this.state.transferAmount, {from: web3.eth.accounts[0]});
+    var tx_hash = this.props.web3_token.transfer(this.state.toAddress, this.state.transferAmount, {from: web3.eth.accounts[0]});
 
     TXActions.add({hash: tx_hash, txType: "transfer"});
     this.setState({transferring: true});

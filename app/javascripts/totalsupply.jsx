@@ -2,8 +2,14 @@ var BalanceOfForm = React.createClass({
   getInitialState: function() {
     return {
       balanceAddress: '',
+      st_ctr: '',
       displayedBalance: '',
     };
+  },
+  componentDidMount: function() {
+    console.log('mounted balance');
+    var st_ctrr = Standard_Token.at(this.props.contractAddress);
+    this.setState({st_ctr: st_ctrr});
   },
   handleAddressChange: function(event) {
     this.setState({balanceAddress: event.target.value});
@@ -13,7 +19,7 @@ var BalanceOfForm = React.createClass({
 
     //can use the normal Pudding promises, since it just a call, not a full transaction.
     var that = this;
-    this.props.pudding_token.balanceOf.call(web3.eth.accounts[0], {from: web3.eth.accounts[0]}).then(function(result) {
+    this.state.st_ctr.balanceOf.call(web3.eth.accounts[0], {from: web3.eth.accounts[0]}).then(function(result) {
       console.log(result.c[0]);
       var balToDisplay = <div>Balance of Address {that.state.balanceAddress} is: {result.c[0]}.</div>;
       that.setState({displayedBalance: balToDisplay});
@@ -24,15 +30,7 @@ var BalanceOfForm = React.createClass({
     //return error if not actual token system.
     return (
       <div>
-        Check Balance of Address: <br />
-        <br />
-        <input type="text" value={this.state.balanceAddress} placeholder="eg. 0x1fe" onChange={this.handleAddressChange}/>
-        {this.state.displayedBalance  }
-        <br />
-
-        <button onClick={this.executeFunction}>Check Balance</button>
-
-
+        Total Supply is: 
       </div>
     );
   }

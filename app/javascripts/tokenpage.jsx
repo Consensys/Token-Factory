@@ -3,15 +3,20 @@ var TokenPage = React.createClass({
     //abi is at Standard_Token.abi.
     return {
       address: '',
-      transferAmount: 0
+      transferAmount: 0,
+      web3_contract: '',
+      pudding_contract: '',
     };
   },
   componentDidMount: function() {
     this.setState({address: this.props.params.address});
+    var web3_contract = web3.eth.contract(Standard_Token.abi).at(this.props.params.address); //for reflux-tx
+    var pudding_contract = Standard_Token.at(this.props.params.address); //for promises
+    this.setState({web3_contract: web3_contract});
+    this.setState({pudding_contract: pudding_contract});
   },
   render: function() {
     //return error if not actual token system.
-
     return (
       <div>
         Interacting with token at address: {this.state.address}. <br />
@@ -19,22 +24,19 @@ var TokenPage = React.createClass({
         Basic Functions: <br />
         <br />
         <TXComponent filter={{txType: "transfer"}}>
-          <TransferForm contractAddress = {this.props.params.address} />
+          <TransferForm pudding_token = {this.state.pudding_contract} web3_token = {this.state.web3_contract} />
         </TXComponent> <br />
 
         <TXComponent filter={{txType: "approve"}}>
-          <ApproveForm contractAddress = {this.props.params.address}/>
+          <ApproveForm pudding_token = {this.state.pudding_contract} web3_token = {this.state.web3_contract} />
         </TXComponent> <br />
 
-        <TXComponent filter={{txType: "unapprove"}}>
-          <UnapproveForm />
-        </TXComponent> <br />
-        <BalanceOfForm contractAddress = {this.props.params.address}/> <br />
+        <UnapproveForm />
+        <BalanceOfForm pudding_token = {this.state.pudding_contract} web3_token = {this.state.web3_contract} /> <br />
 
         Other Functions: <br />
         (TransferFrom)
         (Allowance)
-        (totalSupply)
       </div>
     );
   }

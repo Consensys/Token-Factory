@@ -6,13 +6,7 @@ var ApproveForm = React.createClass({
       approvingHash: '',
       toAddress: '',
       approveAmount: 0,
-      st_ctr: ''
     };
-  },
-  componentDidMount: function() {
-    var create_st_ctr = web3.eth.contract(Standard_Token.abi);
-    var st_ctrr = create_st_ctr.at(this.props.contractAddress);
-    this.setState({st_ctr: st_ctrr});
   },
   componentDidUpdate: function() {
     //first props are passed only after it mounted.
@@ -23,8 +17,7 @@ var ApproveForm = React.createClass({
           this.setState({approving: false});
           console.log('approved');
           //signal SENT
-          var testC = Standard_Token.at(this.props.contractAddress);
-          testC.allowance.call(web3.eth.accounts[0], web3.eth.accounts[1]).then(function(result) {
+          this.props.pudding_token.allowance.call(web3.eth.accounts[0], web3.eth.accounts[1]).then(function(result) {
             console.log('allowance');
             console.log(result);
           });
@@ -51,7 +44,7 @@ var ApproveForm = React.createClass({
     console.log(this.state.approveAmount);
     console.log(this.state.forAddress);
 
-    var tx_hash = this.state.st_ctr.approve(this.state.forAddress, this.state.approveAmount, {from: web3.eth.accounts[0]});
+    var tx_hash = this.props.web3_token.approve(this.state.forAddress, this.state.approveAmount, {from: web3.eth.accounts[0]});
 
     TXActions.add({hash: tx_hash, txType: "approve"});
     this.setState({approving: true});
