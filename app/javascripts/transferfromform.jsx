@@ -51,10 +51,10 @@ var TransferFromForm = React.createClass({
     //return error if not actual token system.
     return (
       <div>
-        Transfer: <br />
+        Transfer From: <br />
         <br />
-        <input type="text" value={this.state.fromAddress} placeholder="eg. 0x1fe" onChange={this.handleFromAddressChange}/><br />
-        <input type="text" value={this.state.toAddress} placeholder="eg. 0x1fe" onChange={this.handleToAddressChange}/><br />
+        <input type="text" value={this.state.fromAddress} placeholder="from: eg. 0x1fe" onChange={this.handleFromAddressChange}/><br />
+        <input type="text" value={this.state.toAddress} placeholder="to: eg. 0x1fe" onChange={this.handleToAddressChange}/><br />
         <input type="text" value={this.state.transferAmount} placeholder="eg. 10" onChange={this.handleAmountChange}/><br />
         <button disabled={this.state.transferring} onClick={this.executeFunction}>Transfer From</button>
       </div>

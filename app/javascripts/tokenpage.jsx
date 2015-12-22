@@ -44,7 +44,7 @@ var TokenPage = React.createClass({
         <TXComponent filter={{txType: "transferFrom"}}>
           <TransferFromForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
         </TXComponent> <br />
-      <AllowanceForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
+        <AllowanceForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
 
       </div>
     );
