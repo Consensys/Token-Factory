@@ -41,8 +41,9 @@ var TokenPage = React.createClass({
         <BalanceOfForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} /> <br />
 
         Other Functions: <br />
-        (TransferFrom)
-        (Allowance)
+      (TransferFrom) <br />
+      <AllowanceForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
+
       </div>
     );
   }

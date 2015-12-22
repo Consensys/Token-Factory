@@ -12,6 +12,7 @@
       "javascripts/approveform.jsx",
       "javascripts/unapproveform.jsx",
       "javascripts/balanceofform.jsx",
+      "javascripts/allowanceform.jsx",
       "javascripts/main.jsx",
       "javascripts/navbar.jsx",
       "javascripts/tokenpage.jsx",
