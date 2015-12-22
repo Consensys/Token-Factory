@@ -13,7 +13,7 @@ var BalanceOfForm = React.createClass({
 
     //can use the normal Pudding promises, since it just a call, not a full transaction.
     var that = this;
-    this.props.pudding_token.balanceOf.call(web3.eth.accounts[0], {from: web3.eth.accounts[0]}).then(function(result) {
+    this.props.pudding_token.balanceOf.call(this.state.balanceAddress, {from: web3.eth.accounts[0]}).then(function(result) {
       console.log(result.c[0]);
       var balToDisplay = <div>Balance of Address {that.state.balanceAddress} is: {result.c[0]}.</div>;
       that.setState({displayedBalance: balToDisplay});

@@ -25,7 +25,7 @@ var TokenPage = React.createClass({
     return (
       <div>
         Interacting with token at address: {this.state.address}. <br />
-      Total Supply is: {this.state.totalSupply}.
+        Total Supply is: {this.state.totalSupply}.
         <br />
         Basic Functions: <br />
         <br />
@@ -41,7 +41,9 @@ var TokenPage = React.createClass({
         <BalanceOfForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} /> <br />
 
         Other Functions: <br />
-      (TransferFrom) <br />
+        <TXComponent filter={{txType: "transferFrom"}}>
+          <TransferFromForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
+        </TXComponent> <br />
       <AllowanceForm pudding_token = {this.state.pudding_token} web3_token = {this.state.web3_token} />
 
       </div>

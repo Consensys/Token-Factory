@@ -8,6 +8,7 @@
       "../node_modules/history/umd/History.js",
       "javascripts/app.js",
       "javascripts/transferform.jsx",
+      "javascripts/transferfromform.jsx",
       "javascripts/createtokenform.jsx",
       "javascripts/approveform.jsx",
       "javascripts/unapproveform.jsx",
