@@ -5,6 +5,5 @@ A dapp that allows for token issuance & management. The purpose for this at this
 Contracts & Tests are borrowed from Tokens repo. Using Truffle.
 
 ```npm install```   
-```truffle deploy``` (if using own local net)   
-```truffle build```    
+```truffle deploy``` (not always needed as .sol.js is written to development config)   
 ```truffle serve```
