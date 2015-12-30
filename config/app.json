@@ -9,6 +9,7 @@
       "javascripts/app.js",
       "javascripts/txform.jsx",
       "javascripts/inputform.jsx",
+      "javascripts/createtokenform.jsx",
       "javascripts/main.jsx",
       "javascripts/navbar.jsx",
       "javascripts/tokenpage.jsx",
