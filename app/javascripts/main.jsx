@@ -8,7 +8,7 @@ window.IndexRoute = ReactRouter.IndexRoute;
 window.Link = ReactRouter.Link;
 window.TXActions = refluxTX.TXActions;
 window.TXComponent = refluxTX.TXComponent;
-TXActions.connect({provider: 'http://localhost:8545', confirmCount: 5, bufferSize: 5})
+TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
 
 //remove _k thing from URLS (removing queryKey)
 window.histor = History.createHashHistory({

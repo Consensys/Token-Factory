@@ -8,6 +8,7 @@ var TxForm = React.createClass({
   },
   componentDidUpdate: function() {
     //first props are passed only after it mounted.
+    //has to re-uptake state after a page refresh.
     if(this.state.processing == true) {
       for(var i = 0; i < this.props.confirmed.length; i+=1) {
         if(this.props.confirmed[i].receipt.transactionHash == this.state.txHash) {
@@ -20,6 +21,8 @@ var TxForm = React.createClass({
     } else {
       if(this.props.pending.length > 0) {
         this.setState({processing: true});
+        //this seems dangerous! Assumes only 1 tx at a time.
+        //revise
         this.setState({txHash: this.props.pending[0].receipt.transactionHash});
       } else if (this.props.received.length > 0) {
         this.setState({processing: true});
@@ -38,7 +41,6 @@ var TxForm = React.createClass({
     //for now, just collect arguments in order.
     //otherwise do something else (like passing a function as a prop)
     args = [];
-    console.log(this);
     for(var i = 0; i < this.props.inputs.length; i+=1) {
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
@@ -57,6 +59,12 @@ var TxForm = React.createClass({
     }
   },
   render: function() {
+    if(this.state.processing) {
+      var buttonMessage = <span> {this.props.buttonProcessing}. Awaiting Confirmation </span>;
+    } else {
+      var buttonMessage = this.props.buttonAction;
+    }
+
     return (
       <div>
         <h3>{this.props.header}</h3>
@@ -65,7 +73,7 @@ var TxForm = React.createClass({
         {this.props.inputs.map(function (result) {
           return <InputForm key={result.key} ref={result.ref} placeholder={result.placeholder} />
         })}
-        <button disabled={this.state.processing} onClick={this.executeFunction}>{this.props.buttonAction}</button>
+        <button disabled={this.state.processing} onClick={this.executeFunction}>{buttonMessage}</button>
       </div>
     );
   }

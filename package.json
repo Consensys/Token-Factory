@@ -5,6 +5,7 @@
   "description": "Token Factory",
   "dependencies": {
     "react": "^0.13.x",
+    "bootstrap": "3.3.6",
     "reflux-tx": "git@github.com:simondlr/reflux-tx.git",
     "react-router": "1.0.1",
     "web3": "git://github.com/ethereum/web3.js#0.15.0",
