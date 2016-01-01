@@ -15,7 +15,7 @@ var TxForm = React.createClass({
           console.log(this.props.confirmed[i].receipt);
           this.setState({processing: false});
           console.log('processed');
-          this.props.successful(this.state.txArgs); //successful transaction with these arguments
+          this.props.successful(this.state.txArgs, this.props.confirmed[i].receipt); //successful transaction with these arguments
         }
       }
     } else {
@@ -47,15 +47,30 @@ var TxForm = React.createClass({
 
     args.push({from: web3.eth.accounts[0]}); //push lightwallet eventually.
 
-    if(this.props.txStyle == "call") {
-      var result = this.props.web3_token[this.props.abiFunction].call.apply(this, args);
-      this.props.successful(result, args); //fires callback function.
-    }
-    else if(this.props.txStyle == "transaction") {
-      var tx_hash = this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
-      console.log(tx_hash);
-      this.setState({txArgs: args}); //need to keep transaction arguments for success function.
-      this.submitTransaction(tx_hash, this.props.txType);
+    console.log(this.props.web3_token);
+    console.log('propping');
+    console.log(this.props);
+    if(typeof this.props.web3_token == 'undefined') {
+      //token creation execution
+      console.log('creating');
+      var ST = web3.eth.contract(Standard_Token.abi);
+      var tx_hash = ST.new(args[0], {from: web3.eth.accounts[0], data: Standard_Token.binary});
+
+      this.submitTransaction(tx_hash.transactionHash, this.props.txType);
+
+    } else {
+      //if normal interaction with token.
+
+      if(this.props.txStyle == "call") {
+        var result = this.props.web3_token[this.props.abiFunction].call.apply(this, args);
+        this.props.successful(result, args); //fires callback function.
+      }
+      else if(this.props.txStyle == "transaction") {
+        var tx_hash = this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
+        console.log(tx_hash);
+        this.setState({txArgs: args}); //need to keep transaction arguments for success function.
+        this.submitTransaction(tx_hash, this.props.txType);
+      }
     }
   },
   render: function() {
@@ -73,7 +88,7 @@ var TxForm = React.createClass({
         {this.props.inputs.map(function (result) {
           return <InputForm key={result.key} ref={result.ref} placeholder={result.placeholder} />
         })}
-        <button disabled={this.state.processing} onClick={this.executeFunction}>{buttonMessage}</button>
+        <button className="btn btn-default" disabled={this.state.processing} onClick={this.executeFunction}>{buttonMessage}</button>
       </div>
     );
   }

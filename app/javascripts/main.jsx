@@ -18,9 +18,13 @@ window.histor = History.createHashHistory({
 var App = React.createClass({
   render: function() {
     return (
-      <div>
-        <NavBar />
-        {this.props.children}
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <NavBar />
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }

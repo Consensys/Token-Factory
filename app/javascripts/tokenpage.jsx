@@ -32,14 +32,14 @@ var TokenPage = React.createClass({
     var balance_result = <div>Balance of {args[0]} is {result.c[0]}. </div>
     this.setState({balance_result: balance_result});
   },
-  successOnTransfer: function(args) {
+  successOnTransfer: function(args, receipt) {
     //call when transfer succeeds.
     //args[0] = to address
     //args[1] = amount
     var transfer_result = <div>{args[1]} has been transferred to {args[0]}. </div>
     this.setState({transfer_result: transfer_result});
   },
-  successOnTransferFrom: function(args) {
+  successOnTransferFrom: function(args, receipt) {
     //call when transferFrom succeeds.
     //args[0] = from address
     //args[1] = to address
@@ -47,7 +47,7 @@ var TokenPage = React.createClass({
     var transferFrom_result = <div>{args[2]} has been transferred to {args[1]} from {args[0]}. </div>
     this.setState({transferFrom_result: transferFrom_result});
   },
-  successOnApproval: function(args) {
+  successOnApproval: function(args, receipt) {
     //call when approval succeeds.
     //args[0] = to address
     //args[1] = amount
@@ -68,23 +68,23 @@ var TokenPage = React.createClass({
         Interacting with token at address: {this.state.address}. <br />
         Total Supply is: {this.state.totalSupply}.
         <br />
-        Basic Functions: <br />
-        <br />
-        <TXComponent filter={{txType: "transfer"}}>
-          <TxForm web3_token = {this.state.web3_token}
-                  txStyle = "transaction"
-                  txType = "transfer"
-                  abiFunction = "transfer"
-                  header = "Transfer Token"
-                  msg = "Transfer to another account."
-                  buttonAction = "Transfer Amount"
-                  buttonProcessing = "Transferring Amount"
-                  successful = {this.successOnTransfer}
-                  inputs = {[{placeholder: "to: eg 0xdeadbeef", key: "address", ref: "address"},
-                            {placeholder: "amount: eg. 10", key: "amount", ref: "amount"}]}
-            />
-        </TXComponent> <br />
-        {this.state.transfer_result}
+        <div className="form-group">
+          <TXComponent filter={{txType: "transfer"}}>
+            <TxForm web3_token = {this.state.web3_token}
+                    txStyle = "transaction"
+                    txType = "transfer"
+                    abiFunction = "transfer"
+                    header = "Transfer Token"
+                    msg = "Transfer to another account."
+                    buttonAction = "Transfer Amount"
+                    buttonProcessing = "Transferring Amount"
+                    successful = {this.successOnTransfer}
+                    inputs = {[{placeholder: "to: eg 0xdeadbeef", key: "address", ref: "address"},
+                              {placeholder: "amount: eg. 10", key: "amount", ref: "amount"}]}
+              />
+          </TXComponent> <br />
+          {this.state.transfer_result}
+        </div>
 
         <TXComponent filter={{txType: "approve"}}>
           <TxForm web3_token = {this.state.web3_token}
@@ -117,7 +117,6 @@ var TokenPage = React.createClass({
       </TXComponent> <br />
     {this.state.balance_result} <br />
 
-        Other Functions: <br />
         <TXComponent filter={{txType: "transferFrom"}}>
           <TxForm web3_token = {this.state.web3_token}
                   txStyle = "transaction"

@@ -2,6 +2,8 @@
   "build": {
     "index.html": "index.html",
     "app.js": [
+      "../node_modules/jquery/dist/jquery.js",
+      "../node_modules/bootstrap/dist/js/bootstrap.js",
       "../node_modules/react/dist/react.js",
       "../node_modules/react-router/umd/ReactRouter.js",
       "../node_modules/reflux-tx/dist/refluxTX.js",
@@ -9,7 +11,6 @@
       "javascripts/app.js",
       "javascripts/txform.jsx",
       "javascripts/inputform.jsx",
-      "javascripts/createtokenform.jsx",
       "javascripts/main.jsx",
       "javascripts/navbar.jsx",
       "javascripts/tokenpage.jsx",
@@ -18,7 +19,8 @@
       "javascripts/frontpage.jsx"
     ],
     "app.css": [
-      "stylesheets/app.css"
+      "stylesheets/app.css",
+      "../node_modules/bootstrap/dist/css/bootstrap.css"
     ],
     "images/": "images/"
   },

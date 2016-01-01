@@ -5,6 +5,7 @@
   "description": "Token Factory",
   "dependencies": {
     "react": "^0.13.x",
+    "jquery": "1.11.3",
     "bootstrap": "3.3.6",
     "reflux-tx": "0.1.5",
     "react-router": "1.0.1",

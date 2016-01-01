@@ -10,7 +10,7 @@ var InputForm = React.createClass({
   render: function() {
     return (
       <div>
-        <input type="text" value={this.state.val} placeholder={this.props.placeholder} onChange={this.handleChange}/><br />
+        <input type="text" className="form-control" value={this.state.val} placeholder={this.props.placeholder} onChange={this.handleChange}/><br />
       </div>
     );
   }
