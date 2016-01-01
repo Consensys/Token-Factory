@@ -26,8 +26,9 @@ contract Standard_Token is Token {
         } else { return false; }
     }
 
-    //NOTE: This function suffers from a bug atm. It is a hack. It only works if arranged like this.
-    //Here be dragons.
+    //NOTE: This function suffers from a bug atm. It is a hack. It only works if the calls are arranged as is below.
+    //Here be dragons. Not sure if VM or Solidity bug. More testing needs to be done.
+    //See: https://github.com/ethereum/solidity/issues/281
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
         //same as above. Replace this line with the following if you want to protect against wrapping uints.
         //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
@@ -44,19 +45,10 @@ contract Standard_Token is Token {
         return balances[_owner];
     }
 
-    function unapprove(address _spender) returns (bool success) {
-        allowed[msg.sender][_spender] = 0;
-        Unapproved(msg.sender, _spender);
-        return true;
-    }
-
     function approve(address _spender, uint256 _value) returns (bool success) {
-        //this is a check to make sure you don't wrap around for approving max (2^256 -1)
-        if(allowed[msg.sender][_spender] + _value > allowed[msg.sender][_spender]) {
-          allowed[msg.sender][_spender] += _value;
-          Approved(msg.sender, _spender, _value);
-          return true;
-        } else { return false; }
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
     }
 
     function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
