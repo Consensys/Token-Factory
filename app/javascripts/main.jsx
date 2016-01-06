@@ -10,6 +10,9 @@ window.TXActions = refluxTX.TXActions;
 window.TXComponent = refluxTX.TXComponent;
 TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
 
+window.AccountBadge = accountBadge.AccountBadge;
+window.AccountSelector = accountBadge.AccountSelector;
+
 //remove _k thing from URLS (removing queryKey)
 window.histor = History.createHashHistory({
   queryKey: false
@@ -34,8 +37,8 @@ window.onload = function() {
   // check if RPC is online. Why though?
   web3.eth.getCoinbase(function(error, coinbase) {
     window.MainRouter = Router;
-    //ReactDOM.render((
-    React.render((
+    ReactDOM.render((
+    //React.render((
       <Router history={histor}>
         <Route path="/" component={App}>
           <IndexRoute component={FrontPage} />

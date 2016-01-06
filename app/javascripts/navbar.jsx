@@ -21,6 +21,7 @@ var NavBar = React.createClass({
                 <li><Link to={'/factory'}>Create Token Contract</Link></li>
               </ul>
 
+              <AccountBadge web3={web3} />
               <p className="navbar-text navbar-right">(lightwallet here)</p>
             </div>
           </div>
