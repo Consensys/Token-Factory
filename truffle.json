@@ -24,8 +24,7 @@
       "stylesheets/app.css",
       "../node_modules/bootstrap/dist/css/bootstrap.css",
       "../node_modules/react-account-badge/style.css"
-    ],
-    "images/": "images/"
+    ]
   },
   "deploy": [
     "Standard_Token",
