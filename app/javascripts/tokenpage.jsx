@@ -21,7 +21,7 @@ var TokenPage = React.createClass({
     this.setState({web3_token: web3_token});
     this.setState({pudding_token: pudding_token});
     var that = this;
-    pudding_token.totalSupply.call({from: web3.eth.accounts[0]}).then(function (result) {
+    pudding_token.totalSupply.call({from: AccountStore.getSelectedAddress()}).then(function (result) {
       that.setState({totalSupply: result.c[0]});
     });
   },

@@ -10,8 +10,11 @@ window.TXActions = refluxTX.TXActions;
 window.TXComponent = refluxTX.TXComponent;
 TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
 
+var web3_sync = new Web3();
+console.log(web3_sync);
+
 window.AccountBadge = accountBadge.AccountBadge;
-window.AccountSelector = accountBadge.AccountSelector;
+window.AccountStore = accountBadge.AccountStore;
 
 //remove _k thing from URLS (removing queryKey)
 window.histor = History.createHashHistory({

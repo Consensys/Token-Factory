@@ -1,0 +1,81 @@
+{
+  "name": "persona",
+  "version": "0.0.4",
+  "description": "persona contracts and example Dapp",
+  "main": "lib/persona.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConsenSys/persona.git"
+  },
+  "homepage": "https://github.com/ConsenSys/persona",
+  "bugs": {
+    "url": "https://github.com/ConsenSys/persona/issues"
+  },
+  "keywords": [
+    "Persona"
+  ],
+  "author": "ConsenSys",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "*",
+    "babelify": "*",
+    "brfs": "*",
+    "buffer": "^3.6.0",
+    "concat-stream": "^1.5.1",
+    "create-hash": "^1.1.2",
+    "eth-lightwallet": "*",
+    "gulp-minify-css": "^1.2.3",
+    "gulp-util": "^3.0.7",
+    "indexof": "*",
+    "vinyl": "^0.5.3"
+  },
+  "scripts": {
+    "build": "browserify -t babelify lib/persona.js --s Persona --o dist/persona.js"
+  },
+  "dependencies": {
+    "better-console": "^0.2.4",
+    "bluebird": "*",
+    "buffer": "^3.4.3",
+    "concat-stream": "^1.5.0",
+    "create-hash": "^1.1.2",
+    "del": "^2.2.0",
+    "ether-pudding": "*",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-chmod": "^1.3.0",
+    "gulp-clone": "^1.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-copy": "0.0.2",
+    "gulp-dedupe": "0.0.2",
+    "gulp-flatten": "^0.2.0",
+    "gulp-header": "^1.7.1",
+    "gulp-help": "^1.6.1",
+    "gulp-if": "^2.0.0",
+    "gulp-less": "^3.0.5",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-print": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-rtlcss": "^0.1.4",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "hooked-web3-provider": "^1.0.0",
+    "ipfs": "^0.1.1",
+    "ipfs-api": "2.3.2",
+    "ipfs-js": "0.0.7",
+    "is-array": "^1.0.1",
+    "require-dot-file": "^0.4.0",
+    "run-sequence": "^1.1.5",
+    "vinyl": "^0.5.1",
+    "web3": "*",
+    "yamljs": "^0.2.4"
+  },
+  "authors": [
+    "Christian Lundkvist",
+    "Tim Coulter"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "build": {
+    // Copy ./app/index.html (right hand side) to ./build/index.html.
+    "index.html": "index.html",
+    "persona.js": {
+      "files": [
+        "javascripts/persona.es6"
+      ],
+      "post-process": [
+        "include-contracts"
+      ]
+    },
+    "demo.js": {
+      "files": [
+        "../node_modules/ipfs-js/ipfs.min.js",
+        "../node_modules/hooked-web3-provider/build/hooked-web3-provider.js",
+        "javascripts/ethlightjs.min.js",
+        "javascripts/buffer.js",
+        "../build/persona.js",
+        "javascripts/app.js"
+      ],
+      "post-process": [
+        "frontend-dependencies"
+      ]
+    },
+    "demo.css": [
+      // Paths relative to "app" directory that should be
+      // concatenated and processed during build.
+      "stylesheets/app.css"
+    ]
+  },
+  "deploy": [
+    "PersonaRegistry"
+  ],
+  "rpc": {
+    "host": "localhost",
+    "port": 8545
+  }
+}

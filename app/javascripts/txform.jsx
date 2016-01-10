@@ -45,7 +45,7 @@ var TxForm = React.createClass({
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
 
-    args.push({from: web3.eth.accounts[0]}); //push lightwallet eventually.
+    args.push({from: AccountStore.getSelectedAddress()}); //push lightwallet eventually.
 
     console.log(this.props.web3_token);
     console.log('propping');
@@ -54,7 +54,7 @@ var TxForm = React.createClass({
       //token creation execution
       console.log('creating');
       var ST = web3.eth.contract(Standard_Token.abi);
-      var tx_hash = ST.new(args[0], {from: web3.eth.accounts[0], data: Standard_Token.binary});
+      var tx_hash = ST.new(args[0], {from: AccountStore.getSelectedAddress(), data: Standard_Token.binary});
 
       this.submitTransaction(tx_hash.transactionHash, this.props.txType);
 
