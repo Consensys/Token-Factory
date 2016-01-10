@@ -1,0 +1,41 @@
+{
+  "name": "react-account-badge",
+  "version": "0.2.0",
+  "main": "./src/Main.js",
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.1.18",
+    "babelify": "^7.2.0",
+    "bluebird": "^3.1.1",
+    "brfs": "^1.4.2",
+    "concat-stream": "^1.5.1",
+    "es6-promise": "^3.0.2",
+    "eth-lightwallet": "*",
+    "ethereumjs-tx": "^0.6.11",
+    "hooked-web3-provider": "^1.0.0",
+    "ipfs-api": "^2.10.1",
+    "object-assign": "^4.0.1",
+    "persona": "file:../persona",
+    "react": "0.14.x",
+    "web3": "^0.15.1"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "reactify": "^1.1.1"
+  },
+  "scripts": {
+    "build": "browserify -s accountBadge -e ./src/Main.js -o ./dist/bundle.js"
+  },
+  "author": {
+    "name": "Daniel Novy - ConsenSys"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/consensys/react-account-badge.git"
+  },
+  "license": "MIT"
+}
