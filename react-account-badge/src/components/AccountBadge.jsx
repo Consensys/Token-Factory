@@ -1,5 +1,4 @@
 var React              = require('react');
-var Web3               = require('web3');
 var HookedWeb3Provider = require('hooked-web3-provider');
 var Transaction        = require('ethereumjs-tx');
 var AccountSelector    = require('./AccountSelector.jsx');
@@ -10,8 +9,6 @@ var AccountStore       = require('../flux/AccountStore.js');
 var Actions            = require('../flux/Actions.js');
 var config             = require('../config.js');
 var PersonaStore       = require('../flux/PersonaStore.js');
-
-var web3 = new Web3();
 
 var addresses = [];
 
@@ -69,7 +66,7 @@ var AccountBadge = React.createClass({
     componentWillMount: function() {
         var _this = this;
         this.enableHookedWeb3Provider();
-        web3.eth.getAccounts(function(err, accounts) {
+        this.props.web3.eth.getAccounts(function(err, accounts) {
             if (err) console.error(err);
             addresses = accounts;
             if (AccountStore.getSelectedAddress() == '') {
@@ -79,7 +76,7 @@ var AccountBadge = React.createClass({
                 _this.setState({selectedAddress: AccountStore.getSelectedAddress()});
             }
         });
-        web3.eth.getGasPrice(function(err, price) {
+        this.props.web3.eth.getGasPrice(function(err, price) {
             if (err) console.error(err);
             gasPrice = '0x' + price.toString(16);
         });
@@ -139,27 +136,27 @@ var AccountBadge = React.createClass({
             }
         });
 
-        web3.setProvider(provider);
+        this.props.web3.setProvider(provider);
     },
 
     render: function() {
         return (
             <div>
-                <Badge 
+                <Badge
                     eid='top-as'
-                    web3={web3}
-                    address={this.state.selectedAddress} 
+                    web3={this.props.web3}
+                    address={this.state.selectedAddress}
                     onClick={this.openAddressSelector}
                 />
-                <AccountSelector 
-                    web3={web3}
+                <AccountSelector
+                    web3={this.props.web3}
                     onClose={this.closeAddressSelector}
                     onSelect={this.onSelect}
                     visible={this.state.accountSelector}
                 />
-                <WalletPassword 
-                    onProceed={this.onEnteredPassword} 
-                    onCancel={this.closePasswordScreen} 
+                <WalletPassword
+                    onProceed={this.onEnteredPassword}
+                    onCancel={this.closePasswordScreen}
                     visible={this.state.passwordScreen}
                 />
             </div>

@@ -1,12 +1,9 @@
-
-
 var TokenPage = React.createClass({
   getInitialState: function() {
     return {
-      address: '',
+      contract_address: '',
       transferAmount: 0,
       web3_token: '',
-      pudding_token: '',
       balance_result: '',
       transfer_result: '',
       transferFrom_result: '',
@@ -15,15 +12,13 @@ var TokenPage = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.setState({address: this.props.params.address});
-    var web3_token = web3.eth.contract(Standard_Token.abi).at(this.props.params.address); //for reflux-tx
-    var pudding_token = Standard_Token.at(this.props.params.address); //for promises
+    this.setState({contract_address: this.props.params.contract_address});
+    var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
     this.setState({web3_token: web3_token});
-    this.setState({pudding_token: pudding_token});
-    var that = this;
-    pudding_token.totalSupply.call({from: AccountStore.getSelectedAddress()}).then(function (result) {
-      that.setState({totalSupply: result.c[0]});
-    });
+    var addr = AccountStore.getSelectedAddress();
+    var totalSupply = web3_token.totalSupply.call({from: addr});
+    console.log(totalSupply);
+    this.setState({totalSupply: totalSupply.c[0]});
   },
   successOnBalance: function(result, args) {
     //call when balanceOf call succeeds.
@@ -65,7 +60,7 @@ var TokenPage = React.createClass({
     //return error if not actual token system.
     return (
       <div>
-        Interacting with token at address: {this.state.address}. <br />
+        Interacting with token at address: {this.state.contract_address}. <br />
         Total Supply is: {this.state.totalSupply}.
         <br />
         <div className="form-group">

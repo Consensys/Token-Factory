@@ -10,8 +10,9 @@ window.TXActions = refluxTX.TXActions;
 window.TXComponent = refluxTX.TXComponent;
 TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
 
-var web3_sync = new Web3();
-console.log(web3_sync);
+window.web3_rab = new Web3();
+web3 = new Web3();
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545')); //default provider until overwritten.
 
 window.AccountBadge = accountBadge.AccountBadge;
 window.AccountStore = accountBadge.AccountStore;
@@ -47,7 +48,7 @@ window.onload = function() {
           <IndexRoute component={FrontPage} />
           <Route path="/tokensearch" component={TokenSearchPage} />
           <Route path="/factory" component={FactoryPage} />
-          <Route path="/token/:address" component={TokenPage} />
+          <Route path="/token/:contract_address" component={TokenPage} />
         </Route>
       </Router>
     ), document.body);

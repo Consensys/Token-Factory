@@ -53,23 +53,44 @@ var TxForm = React.createClass({
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
       console.log('creating');
-      var ST = web3.eth.contract(Standard_Token.abi);
-      var tx_hash = ST.new(args[0], {from: AccountStore.getSelectedAddress(), data: Standard_Token.binary});
-
-      this.submitTransaction(tx_hash.transactionHash, this.props.txType);
+      var ST = web3_rab.eth.contract(Standard_Token.abi);
+      var tx_hash = null;
+      var addr = AccountStore.getSelectedAddress();
+      console.log(addr);
+      var that = this;
+      ST.new(args[0], {from: addr, data: Standard_Token.binary}, function(err, result) {
+        //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
+        if(err) {
+          console.log(err);
+        } else {
+          console.log(result);
+          if(result != null) {
+            console.log("submitting");
+            tx_hash = result;
+            that.submitTransaction(tx_hash.transactionHash, that.props.txType);
+          }
+        }
+      });
 
     } else {
       //if normal interaction with token.
-
       if(this.props.txStyle == "call") {
         var result = this.props.web3_token[this.props.abiFunction].call.apply(this, args);
         this.props.successful(result, args); //fires callback function.
       }
       else if(this.props.txStyle == "transaction") {
-        var tx_hash = this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
-        console.log(tx_hash);
-        this.setState({txArgs: args}); //need to keep transaction arguments for success function.
-        this.submitTransaction(tx_hash, this.props.txType);
+        args.push(function(err, result) {
+          if(!err) {
+            console.log(result);
+            if(result != null) {
+              var tx_hash = result;
+              that.setState({txArgs: args}); //need to keep transaction arguments for success function.
+              that.submitTransaction(tx_hash, that.props.txType);
+            }
+          }
+        });
+        var that = this;
+        this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
       }
     }
   },
