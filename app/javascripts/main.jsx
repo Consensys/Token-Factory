@@ -1,7 +1,3 @@
-//currently uses modified reflux-tx & modified ethersim to work.
-//also moved to react 0.13 (history 1.13 & removed reactdom) for reflux-tx to work.
-//NOTE: The code uses a combo of promises + reflux-tx store.
-//For call it uses promise, but for normal transactions it uses the store.
 window.Route = ReactRouter.Route;
 window.Router = ReactRouter.Router;
 window.IndexRoute = ReactRouter.IndexRoute;
@@ -11,6 +7,7 @@ window.TXComponent = refluxTX.TXComponent;
 TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
 
 window.web3_rab = new Web3();
+console.log(web3);
 web3 = new Web3();
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545')); //default provider until overwritten.
 

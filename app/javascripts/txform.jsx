@@ -32,9 +32,9 @@ var TxForm = React.createClass({
   },
   submitTransaction: function(tx_hash, tx_type) {
     console.log(tx_hash, tx_type);
-    TXActions.add({hash: tx_hash, txType: tx_type});
     this.setState({processing: true});
     this.setState({txHash: tx_hash});
+    TXActions.add({hash: tx_hash, txType: tx_type});
   },
   executeFunction: function() {
 
@@ -45,29 +45,28 @@ var TxForm = React.createClass({
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
 
-    args.push({from: AccountStore.getSelectedAddress()}); //push lightwallet eventually.
+    var addr = AccountStore.getSelectedAddress();
+    args.push({from: addr, gas: 3000000}); //push lightwallet eventually.
 
-    console.log(this.props.web3_token);
-    console.log('propping');
-    console.log(this.props);
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
       console.log('creating');
       var ST = web3_rab.eth.contract(Standard_Token.abi);
       var tx_hash = null;
-      var addr = AccountStore.getSelectedAddress();
-      console.log(addr);
       var that = this;
-      ST.new(args[0], {from: addr, data: Standard_Token.binary}, function(err, result) {
+      var creation_data = ST.new.getData(args[0], {data: Standard_Token.binary});
+      ST.new(args[0], {from: addr, data: "0x"+Standard_Token.binary, gas: 3100000}, function(err, result) {
         //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
         if(err) {
           console.log(err);
         } else {
-          console.log(result);
           if(result != null) {
-            console.log("submitting");
-            tx_hash = result;
-            that.submitTransaction(tx_hash.transactionHash, that.props.txType);
+            if(!result.address) {
+              console.log("submitting");
+              tx_hash = result;
+              console.log(tx_hash);
+              that.submitTransaction(tx_hash.transactionHash, that.props.txType);
+            }
           }
         }
       });
