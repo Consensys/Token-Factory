@@ -9,7 +9,7 @@
       "../node_modules/react-dom/dist/react-dom.js",
       "../node_modules/react-router/umd/ReactRouter.js",
       "../node_modules/history/umd/History.js",
-      "../node_modules/react-account-badge/dist/bundle.js",
+      "../rab_bundle.js",
       "../node_modules/web3/dist/web3.js",
       "javascripts/app.js",
       "javascripts/txform.jsx",
