@@ -7,5 +7,5 @@ See here on how to install this Truffle: https://github.com/ConsenSys/truffle/wi
 
 
 ```npm install```   
-(In here you will need to run "npm run prepublish" in reflux-tx node module to create the lib folder).
+(In here you will need to run "npm run prepublish" in reflux-tx node module to create the lib folder).  
 ```truffle serve```
