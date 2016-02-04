@@ -1,3 +1,7 @@
+import React from "react";
+import {TXComponent} from "reflux-tx";
+import TxForm from "./txform.jsx";
+
 var FactoryPage = React.createClass({
   getInitialState: function() {
     return {
@@ -5,7 +9,7 @@ var FactoryPage = React.createClass({
     }
   },
   successOnCreation: function(args, receipt) {
-    histor.pushState(null, '/token/' + receipt.contractAddress);
+    this.props.history.pushState(null, '/token/' + receipt.contractAddress);
   },
   render: function() {
     return (
@@ -25,4 +29,4 @@ var FactoryPage = React.createClass({
   }
 });
 
-window.FactoryPage = FactoryPage;
+module.exports = FactoryPage;

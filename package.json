@@ -4,23 +4,37 @@
   "version": "0.0.1",
   "description": "Token Factory",
   "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "bluebird": "^3.1.5",
+    "bootstrap": "3.3.6",
+    "copy-webpack-plugin": "^1.1.1",
+    "ether-pudding": "^1.1.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "history": "1.13.x",
+    "jquery": "1.11.3",
+    "json-loader": "^0.5.4",
+    "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "jquery": "1.11.3",
-    "bootstrap": "3.3.6",
-    "reflux-tx": "0.1.6",
     "react-router": "1.0.1",
-    "react-account-badge": "./react-account-badge",
-    "web3": "git://github.com/ethereum/web3.js#0.15.0",
-    "history": "1.13.x"
+    "reflux-tx": "git@github.com:simondlr/reflux-tx.git",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "web3": "git://github.com/ethereum/web3.js.git#0.15.0",
+    "webpack": "^1.12.12"
   },
   "devDependencies": {
     "async": "*",
+    "babel-runtime": "^6.3.19",
     "bluebird": "*",
+    "file-loader": "^0.8.5",
     "lodash": "*",
-    "mkdirp": "*"
+    "mkdirp": "*",
+    "url-loader": "^0.5.7"
   },
-
   "author": "consensys.net",
   "authors": [
     {

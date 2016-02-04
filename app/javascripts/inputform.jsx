@@ -1,3 +1,5 @@
+import React from "react";
+
 var InputForm = React.createClass({
   getInitialState: function() {
     return {
@@ -15,4 +17,4 @@ var InputForm = React.createClass({
     );
   }
 });
-window.InputForm = InputForm;
+module.exports = InputForm;

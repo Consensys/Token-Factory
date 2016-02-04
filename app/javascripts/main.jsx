@@ -1,25 +1,52 @@
-window.Route = ReactRouter.Route;
-window.Router = ReactRouter.Router;
-window.IndexRoute = ReactRouter.IndexRoute;
-window.Link = ReactRouter.Link;
-window.TXActions = refluxTX.TXActions;
-window.TXComponent = refluxTX.TXComponent;
-TXActions.connect({provider: 'http://localhost:8545', confirmCount: 1, bufferSize: 5})
+import {} from "../stylesheets/app.scss";
 
-window.web3_rab = new Web3();
-console.log(web3);
-web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545')); //default provider until overwritten.
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactRouter from "react-router";
+import { Router, Route, IndexRoute, Link } from 'react-router';
+import { TXActions } from 'reflux-tx';
+//import TXActions from "reflux-tx".TXActions;
+//import TXComponent from "reflux-tx".TXComponent;
+//import AccountBadge from "react-account-badge";
+var web3 = require("./bootstrap.js");
+//import Web3 from "web3";
 
-window.AccountBadge = accountBadge.AccountBadge;
-window.AccountStore = accountBadge.AccountStore;
+//web3? Apparently it is "provided"?
+
+import NavBar from "./navbar.jsx";
+import FactoryPage from "./factorypage.jsx";
+import FrontPage from "./frontpage.jsx";
+import TokenPage from "./tokenpage.jsx";
+import TokenSearchPage from "./tokensearchpage.jsx";
+
+
+//feels like webpack anti-pattern??
+//window.Route = ReactRouter.Route;
+//window.Router = ReactRouter.Router;
+//window.IndexRoute = ReactRouter.IndexRoute;
+//window.Link = ReactRouter.Link;
+
+//window.TXActions = refluxTX.TXActions;
+//window.TXComponent = refluxTX.TXComponent;
+console.log(TXActions);
+TXActions.connect(web3, {confirmCount: 1, bufferSize: 5})
+
+//window.web3_rab = new Web3();
+//console.log(web3);
+//web3 = new Web3();
+//web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545')); //default provider until overwritten.
+
+//window.AccountBadge = accountBadge.AccountBadge;
+//window.AccountStore = accountBadge.AccountStore;
 
 //remove _k thing from URLS (removing queryKey)
-window.histor = History.createHashHistory({
+import createHistory from 'history/lib/createHashHistory';
+//window.histor = History.createHashHistory({
+let history = createHistory({
   queryKey: false
 });
 
-var App = React.createClass({
+let App = React.createClass({
   render: function() {
     return (
       <div className="container">
@@ -37,10 +64,10 @@ var App = React.createClass({
 window.onload = function() {
   // check if RPC is online. Why though?
   web3.eth.getCoinbase(function(error, coinbase) {
-    window.MainRouter = Router;
+    //window.MainRouter = Router;
     ReactDOM.render((
     //React.render((
-      <Router history={histor}>
+      <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={FrontPage} />
           <Route path="/tokensearch" component={TokenSearchPage} />
@@ -48,7 +75,7 @@ window.onload = function() {
           <Route path="/token/:contract_address" component={TokenPage} />
         </Route>
       </Router>
-    ), document.body);
+    ), document.getElementById('main'));
 
   });
 };

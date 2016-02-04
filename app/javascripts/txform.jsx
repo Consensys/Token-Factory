@@ -1,3 +1,6 @@
+import React from "react";
+import InputForm from "./inputform.jsx";
+
 var TxForm = React.createClass({
   getInitialState: function() {
     return {
@@ -40,7 +43,7 @@ var TxForm = React.createClass({
 
     //for now, just collect arguments in order.
     //otherwise do something else (like passing a function as a prop)
-    args = [];
+    var args = [];
     for(var i = 0; i < this.props.inputs.length; i+=1) {
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
@@ -51,7 +54,7 @@ var TxForm = React.createClass({
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
       console.log('creating');
-      var ST = web3_rab.eth.contract(Standard_Token.abi);
+      var ST = web3.eth.contract(Standard_Token.abi);
       var tx_hash = null;
       var that = this;
       //var creation_data = ST.new.getData(args[0], {data: Standard_Token.binary});
@@ -113,4 +116,4 @@ var TxForm = React.createClass({
     );
   }
 });
-window.TxForm = TxForm;
+module.exports = TxForm;

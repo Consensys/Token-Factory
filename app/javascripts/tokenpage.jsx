@@ -1,3 +1,6 @@
+import React from "react";
+
+
 var TokenPage = React.createClass({
   getInitialState: function() {
     return {
@@ -13,7 +16,8 @@ var TokenPage = React.createClass({
   },
   componentDidMount: function() {
     this.setState({contract_address: this.props.params.contract_address});
-    var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
+    //var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
+    var web3_token = web3.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
     this.setState({web3_token: web3_token});
     var addr = AccountStore.getSelectedAddress();
     var totalSupply = web3_token.totalSupply.call({from: addr});
@@ -150,4 +154,4 @@ var TokenPage = React.createClass({
   }
 });
 
-window.TokenPage = TokenPage;
+module.exports = TokenPage;

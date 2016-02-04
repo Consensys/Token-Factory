@@ -1,3 +1,5 @@
+import React from "react";
+
 var TokenSearchPage = React.createClass({
   getInitialState: function() {
     return {
@@ -24,4 +26,4 @@ var TokenSearchPage = React.createClass({
   }
 });
 
-window.TokenSearchPage = TokenSearchPage;
+module.exports = TokenSearchPage;

@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router';
+
 var FrontPage = React.createClass({
   render: function() {
     return (
@@ -13,4 +16,4 @@ var FrontPage = React.createClass({
   }
 });
 
-window.FrontPage = FrontPage;
+module.exports = FrontPage;

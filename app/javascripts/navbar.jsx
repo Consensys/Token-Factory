@@ -1,3 +1,7 @@
+import React from "react";
+import { Link } from "react-router";
+//import AccountBadge from "react-account-badge";
+//<AccountBadge web3={web3_rab} />
 var NavBar = React.createClass({
   render: function() {
     return (
@@ -21,8 +25,8 @@ var NavBar = React.createClass({
                 <li><Link to={'/factory'}>Create Token Contract</Link></li>
               </ul>
 
-              <AccountBadge web3={web3_rab} />
-              
+
+
             </div>
           </div>
         </nav>
@@ -31,4 +35,4 @@ var NavBar = React.createClass({
   }
 });
 
-window.NavBar = NavBar;
+module.exports = NavBar;
