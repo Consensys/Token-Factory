@@ -4,7 +4,7 @@ Allows the creation of a token with a finite issued amount to the creator.
 Based on standardised APIs: https://github.com/ethereum/wiki/wiki/Standardized_Contract_APIs
 .*/
 
-import "Token";
+import "Token.sol";
 
 contract Standard_Token is Token {
 

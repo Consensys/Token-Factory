@@ -1,5 +1,6 @@
 import React from "react";
-
+import {TXComponent} from "reflux-tx";
+import TxForm from "./txform.jsx";
 
 var TokenPage = React.createClass({
   getInitialState: function() {
@@ -19,10 +20,13 @@ var TokenPage = React.createClass({
     //var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
     var web3_token = web3.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
     this.setState({web3_token: web3_token});
-    var addr = AccountStore.getSelectedAddress();
-    var totalSupply = web3_token.totalSupply.call({from: addr});
-    console.log(totalSupply);
-    this.setState({totalSupply: totalSupply.c[0]});
+    var that = this;
+    web3.eth.getAccounts(function(err, accounts){
+      var addr = accounts[0];
+      var totalSupply = web3_token.totalSupply.call({from: addr});
+      console.log(totalSupply);
+      that.setState({totalSupply: totalSupply.c[0]});
+    });
   },
   successOnBalance: function(result, args) {
     //call when balanceOf call succeeds.

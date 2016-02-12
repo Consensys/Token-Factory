@@ -1,5 +1,6 @@
 import React from "react";
 import InputForm from "./inputform.jsx";
+import { TXActions } from 'reflux-tx';
 
 var TxForm = React.createClass({
   getInitialState: function() {
@@ -48,9 +49,6 @@ var TxForm = React.createClass({
       args.push(this.refs[this.props.inputs[i].ref].state.val);
     }
 
-    var addr = AccountStore.getSelectedAddress();
-    args.push({from: addr, gas: 3000000}); //push lightwallet eventually.
-
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
       console.log('creating');
@@ -58,21 +56,29 @@ var TxForm = React.createClass({
       var tx_hash = null;
       var that = this;
       //var creation_data = ST.new.getData(args[0], {data: Standard_Token.binary});
-      ST.new(args[0], {from: addr, data: "0x"+Standard_Token.binary, gas: 3100000}, function(err, result) {
-        //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
-        if(err) {
-          console.log(err);
-        } else {
-          if(result != null) {
-            if(!result.address) {
-              console.log("submitting");
-              tx_hash = result;
-              console.log(tx_hash);
-              that.submitTransaction(tx_hash.transactionHash, that.props.txType);
+      console.log(web3);
+      web3.eth.getAccounts(function(err, accounts){
+        var addr = accounts[0];
+        console.log(addr);
+        console.log(ST);
+        console.log("0x"+Standard_Token.prototype.binary);
+        ST.new(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gas: 3100000}, function(err, result) {
+          //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
+          if(err) {
+            console.log(err);
+          } else {
+            if(result != null) {
+              if(!result.address) {
+                console.log("submitting");
+                tx_hash = result;
+                console.log(tx_hash);
+                that.submitTransaction(tx_hash.transactionHash, that.props.txType);
+              }
             }
           }
-        }
+        });
       });
+
 
     } else {
       //if normal interaction with token.
@@ -92,7 +98,12 @@ var TxForm = React.createClass({
           }
         });
         var that = this;
-        this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
+        args.push({ gas: 3000000});
+        web3.eth.getAccounts(function(err, accounts){
+          var addr = accounts[0];
+          args.push({from: addr});
+          this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
+        });
       }
     }
   },

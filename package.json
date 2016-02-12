@@ -11,7 +11,7 @@
     "bluebird": "^3.1.5",
     "bootstrap": "3.3.6",
     "copy-webpack-plugin": "^1.1.1",
-    "ether-pudding": "^1.1.4",
+    "ether-pudding": "^2.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "history": "1.13.x",
     "jquery": "1.11.3",
