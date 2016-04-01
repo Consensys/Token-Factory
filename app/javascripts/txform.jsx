@@ -2,6 +2,8 @@ import React from "react";
 import InputForm from "./inputform.jsx";
 import { TXActions } from 'reflux-tx';
 
+window.txa = TXActions;
+
 var TxForm = React.createClass({
   getInitialState: function() {
     return {
@@ -17,6 +19,7 @@ var TxForm = React.createClass({
       for(var i = 0; i < this.props.confirmed.length; i+=1) {
         if(this.props.confirmed[i].receipt.transactionHash == this.state.txHash) {
           console.log(this.props.confirmed[i].receipt);
+          //console.log(web_l.eth.blockNumber);
           this.setState({processing: false});
           console.log('processed');
           this.props.successful(this.state.txArgs, this.props.confirmed[i].receipt); //successful transaction with these arguments
@@ -24,10 +27,11 @@ var TxForm = React.createClass({
       }
     } else {
       if(this.props.pending.length > 0) {
+        console.log(this.props.pending);
         this.setState({processing: true});
         //this seems dangerous! Assumes only 1 tx at a time.
         //revise
-        this.setState({txHash: this.props.pending[0].receipt.transactionHash});
+        this.setState({txHash: this.props.pending[0].data.hash});
       } else if (this.props.received.length > 0) {
         this.setState({processing: true});
         this.setState({txHash: this.props.received[0].receipt.transactionHash});
@@ -61,8 +65,13 @@ var TxForm = React.createClass({
         var addr = accounts[0];
         console.log(addr);
         console.log(ST);
+        console.log(Standard_Token.abi);
         console.log("0x"+Standard_Token.prototype.binary);
-        ST.new(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gas: 3100000}, function(err, result) {
+        //TODO: change gas price
+        var creation_data = ST.new.getData(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gasPrice: 50000000000, gas: 3100000});
+        console.log(creation_data);
+        console.log(args[0]);
+        ST.new(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gasPrice: 50000000000, gas: 3100000}, function(err, result) {
           //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
           if(err) {
             console.log(err);
@@ -87,22 +96,24 @@ var TxForm = React.createClass({
         this.props.successful(result, args); //fires callback function.
       }
       else if(this.props.txStyle == "transaction") {
-        args.push(function(err, result) {
-          if(!err) {
-            console.log(result);
-            if(result != null) {
-              var tx_hash = result;
-              that.setState({txArgs: args}); //need to keep transaction arguments for success function.
-              that.submitTransaction(tx_hash, that.props.txType);
-            }
-          }
-        });
         var that = this;
-        args.push({ gas: 3000000});
+        args.push({gas: 300000});
         web3.eth.getAccounts(function(err, accounts){
           var addr = accounts[0];
           args.push({from: addr});
-          this.props.web3_token[this.props.abiFunction].sendTransaction.apply(this, args);
+          //the callback (must be after part)
+          args.push(function(err, result) {
+            if(!err) {
+              console.log(result);
+              if(result != null) {
+                var tx_hash = result;
+                that.setState({txArgs: args}); //need to keep transaction arguments for success function.
+                that.submitTransaction(tx_hash, that.props.txType);
+              }
+            }
+          });
+          console.log(args);
+          that.props.web3_token[that.props.abiFunction].sendTransaction.apply(that, args);
         });
       }
     }

@@ -19,6 +19,7 @@ var TokenPage = React.createClass({
     this.setState({contract_address: this.props.params.contract_address});
     //var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
     var web3_token = web3.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
+    window.token_c = web3_token;
     this.setState({web3_token: web3_token});
     var that = this;
     web3.eth.getAccounts(function(err, accounts){
