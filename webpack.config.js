@@ -39,8 +39,8 @@ module.exports = {
       //{ test: /localforage\/dist\/localforage\.js/, loader: 'exports?localforage'},
       { test: /\.scss$/i, exclude: /node_modules/, loader: ExtractTextPlugin.extract(["css", "sass"])},
       { test: /\.json$/i, loader: "json"},
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: /bootstrap/, loader: 'url-loader?limit=10000&minetype=application/font-woff' },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: /bootstrap/, loader: 'file-loader' }
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: [/bootstrap/, /font-awesome/], loader: 'url-loader?limit=10000&minetype=application/font-woff' },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: [/bootstrap/, /font-awesome/], loader: 'file-loader' }
     ],
     noParse: [/\.min\.js$/]
     //noParse: [/\.min\.js$/, /localforage\/dist\/localforage\.js/]

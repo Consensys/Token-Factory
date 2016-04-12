@@ -2,7 +2,7 @@ import React from "react";
 import InputForm from "./inputform.jsx";
 import { TXActions } from 'reflux-tx';
 
-window.txa = TXActions;
+window.txa = TXActions; //debugging
 
 var TxForm = React.createClass({
   getInitialState: function() {
@@ -15,14 +15,17 @@ var TxForm = React.createClass({
   componentDidUpdate: function() {
     //first props are passed only after it mounted.
     //has to re-uptake state after a page refresh.
+    /*web3.eth.getBlockNumber(function(result) {
+      console.log(result);
+    });*/
     if(this.state.processing == true) {
-      for(var i = 0; i < this.props.confirmed.length; i+=1) {
-        if(this.props.confirmed[i].receipt.transactionHash == this.state.txHash) {
-          console.log(this.props.confirmed[i].receipt);
+      for(var i = 0; i < this.props.received.length; i+=1) {
+        if(this.props.received[i].receipt.transactionHash == this.state.txHash) {
+          console.log(this.props.received[i].receipt);
           //console.log(web_l.eth.blockNumber);
           this.setState({processing: false});
           console.log('processed');
-          this.props.successful(this.state.txArgs, this.props.confirmed[i].receipt); //successful transaction with these arguments
+          this.props.successful(this.state.txArgs, this.props.received[i].receipt); //successful transaction with these arguments
         }
       }
     } else {
@@ -32,10 +35,10 @@ var TxForm = React.createClass({
         //this seems dangerous! Assumes only 1 tx at a time.
         //revise
         this.setState({txHash: this.props.pending[0].data.hash});
-      } else if (this.props.received.length > 0) {
+      } /*else if (this.props.received.length > 0) {
         this.setState({processing: true});
         this.setState({txHash: this.props.received[0].receipt.transactionHash});
-      }
+      }*/
     }
   },
   submitTransaction: function(tx_hash, tx_type) {
@@ -97,7 +100,7 @@ var TxForm = React.createClass({
       }
       else if(this.props.txStyle == "transaction") {
         var that = this;
-        args.push({gas: 300000});
+        args.push({gas: 300000}); //TODO: change to estimateGas
         web3.eth.getAccounts(function(err, accounts){
           var addr = accounts[0];
           args.push({from: addr});
@@ -120,7 +123,7 @@ var TxForm = React.createClass({
   },
   render: function() {
     if(this.state.processing) {
-      var buttonMessage = <span> {this.props.buttonProcessing}. Awaiting Confirmation </span>;
+      var buttonMessage = <span><i className="fa fa-circle-o-notch fa-spin"></i> {this.props.buttonProcessing}. Awaiting Confirmation </span>;
     } else {
       var buttonMessage = this.props.buttonAction;
     }

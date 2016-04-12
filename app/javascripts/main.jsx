@@ -46,13 +46,37 @@ let history = createHistory({
   queryKey: false
 });
 
+
+
 let App = React.createClass({
+  getInitialState: function() {
+    return {
+      blockNumber: web3.eth.blockNumber,
+    };
+  },
+  componentDidMount: function() {
+    var that = this;
+    //filter here seems like "non"-react way to do things.
+    //TXComponent inherits blocknumber. Use that instead.
+    web3.eth.filter('latest', function(error, result){
+      if (!error)
+        console.log('app watcher');
+        setTimeout(that.checkBlockNumber, 1000);
+    });
+  },
+  checkBlockNumber: function() {
+      var nbn = web3.eth.blockNumber;
+      if(nbn > this.state.blockNumber) {
+        console.log(nbn);
+        this.setState({blockNumber: nbn});
+      }
+  },
   render: function() {
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
-            <NavBar />
+            <NavBar blockNumber={this.state.blockNumber}/>
             {this.props.children}
           </div>
         </div>
