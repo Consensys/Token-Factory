@@ -10,6 +10,7 @@
     "babel-preset-react": "^6.3.13",
     "bluebird": "^3.1.5",
     "bootstrap": "3.3.6",
+    "bootstrap-webpack": "0.0.5",
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.1",
     "ether-pudding": "^2.0.0",
