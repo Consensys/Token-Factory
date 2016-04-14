@@ -3,11 +3,6 @@ import { Link } from "react-router";
 //import AccountBadge from "react-account-badge";
 //<AccountBadge web3={web3_rab} />
 var NavBar = React.createClass({
-  getInitialState: function() {
-    return {
-      blockNumber: 0,
-    };
-  },
   render: function() {
     return (
       <div>
@@ -21,6 +16,7 @@ var NavBar = React.createClass({
                 <span className="icon-bar"></span>
               </button>
               <a className="navbar-brand" href="#">Factory</a>
+              <p className="navbar-text">Block Number: {this.props.blockNumber}</p>
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -29,10 +25,6 @@ var NavBar = React.createClass({
                 <li><Link to={'/tokensearch'}>Interact With Token Contract</Link></li>
                 <li><Link to={'/factory'}>Create Token Contract</Link></li>
               </ul>
-                <p className="navbar-text">Block Number: {this.props.blockNumber}</p>
-
-
-
             </div>
           </div>
         </nav>

@@ -28,6 +28,7 @@ module.exports = {
   module: {
     loaders: [
       //{ test: /\.(js|jsx|es6)$/, exclude: /node_modules/, include: [/reflux-tx/], loader: "babel-loader"},
+      { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
       { test: /\.(js|jsx|es6)$/, exclude: /node_modules/, loader: "babel-loader"},
       //localforage excluded due to "loose" option in babelrc being changed in babel 6.
       //https://github.com/mozilla/localForage/issues/496

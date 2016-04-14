@@ -8,7 +8,7 @@ import { TXActions } from 'reflux-tx';
 //import TXActions from "reflux-tx".TXActions;
 //import TXComponent from "reflux-tx".TXComponent;
 //import AccountBadge from "react-account-badge";
-var web3 = require("./bootstrap.js");
+var web3 = require("./web3_bootstrap.js");
 //import Web3 from "web3";
 
 //web3? Apparently it is "provided"?
@@ -18,6 +18,9 @@ import FactoryPage from "./factorypage.jsx";
 import FrontPage from "./frontpage.jsx";
 import TokenPage from "./tokenpage.jsx";
 import TokenSearchPage from "./tokensearchpage.jsx";
+require('bootstrap-webpack!./bootstrap.config.js');
+var $ = require('jquery');
+console.log($);
 
 
 //feels like webpack anti-pattern??
