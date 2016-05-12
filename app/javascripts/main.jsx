@@ -70,8 +70,10 @@ let App = React.createClass({
     web3.eth.filter('latest', function(error, result){
       if (!error)
         console.log('app watcher');
-        setTimeout(that.checkBlockNumber, 1000);
+        setTimeout(that.checkBlockNumber, 1000); //wait a bit
     });
+
+    //TODO: log current address in here instead with a timeout
   },
   checkBlockNumber: function() {
       //console.log(web3);

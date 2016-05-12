@@ -5,6 +5,7 @@ import TxForm from "./txform.jsx";
 var TokenPage = React.createClass({
   getInitialState: function() {
     return {
+      current_user_address: '',
       contract_address: '',
       transferAmount: 0,
       web3_token: '',
@@ -27,6 +28,7 @@ var TokenPage = React.createClass({
       var totalSupply = web3_token.totalSupply.call({from: addr});
       console.log(totalSupply);
       that.setState({totalSupply: totalSupply.c[0]});
+      that.setState({current_user_address: addr});
     });
   },
   successOnBalance: function(result, args) {
@@ -70,7 +72,8 @@ var TokenPage = React.createClass({
     return (
       <div>
         Interacting with token at address: {this.state.contract_address}. <br />
-        Total Supply is: {this.state.totalSupply}.
+        Total Supply is: {this.state.totalSupply}. <br />
+      Current User Address & Balance: {this.state.current_user_address}. <br />
         <br />
         <div className="form-group">
           <TXComponent filter={{txType: "transfer"}}>
