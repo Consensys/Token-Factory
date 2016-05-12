@@ -5,12 +5,17 @@ var FrontPage = React.createClass({
   render: function() {
     return (
       <div>
-        Welcome to token Factory.<br />
+        <h2 style={{textAlign: 'center'}}> Token Factory (Alpha) </h2>
+        <img width="200px" className="logo img-responsive center-block" src="./images/icon.png"></img>
         <br />
-        You can interact with any token system (that followed the standard APIs) & create tokens.<br />
+        <p style={{textAlign: "center"}}>
+        Issue & Interact with a Standard Token Contract on Ethereum. <br />
+      <br />
+        Best used in conjunction with <a href="http://metamask.io/">Metamask.</a><br />
         <br />
-        <Link to={'/tokensearch'}>Interact with a Token System</Link> <br />
+        <Link to={'/tokensearch'}>Interact with an already deployed Token Contract</Link> <br />
         <Link to={'/factory'}>Create Tokens</Link> <br />
+        </p>
       </div>
     );
   }

@@ -20,7 +20,7 @@ import TokenPage from "./tokenpage.jsx";
 import TokenSearchPage from "./tokensearchpage.jsx";
 require('bootstrap-webpack!./bootstrap.config.js');
 var $ = require('jquery');
-console.log($);
+//console.log($);
 
 
 //feels like webpack anti-pattern??

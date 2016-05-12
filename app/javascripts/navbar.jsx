@@ -6,7 +6,7 @@ var NavBar = React.createClass({
   render: function() {
     return (
       <div>
-        <nav className="navbar navbar-default navbar-fixed-top">
+        <nav style={{}} className="navbar navbar-default navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -15,8 +15,8 @@ var NavBar = React.createClass({
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#">Factory</a>
-              <p className="navbar-text">Block Number: {this.props.blockNumber}</p>
+              <a className="navbar-brand" href="#"><img height="25px" src="./images/icon.png"></img></a>
+              <p className="navbar-text" style={{textDecoration: 'underline'}}>Block Number: {this.props.blockNumber}</p>
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
