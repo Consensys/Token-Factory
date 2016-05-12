@@ -24,6 +24,7 @@ var NavBar = React.createClass({
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/tokensearch'}>Interact With Token Contract</Link></li>
                 <li><Link to={'/factory'}>Create Token Contract</Link></li>
+                <li><p className="navbar-text" style={{color: 'red'}}>{this.props.offline_msg}</p></li>
               </ul>
             </div>
           </div>

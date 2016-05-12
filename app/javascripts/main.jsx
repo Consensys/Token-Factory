@@ -55,10 +55,16 @@ let App = React.createClass({
   getInitialState: function() {
     return {
       blockNumber: web3.eth.blockNumber,
+      offline_msg: ''
     };
   },
   componentDidMount: function() {
     var that = this;
+    if(window.offline == true) {
+      console.log('offline');
+      this.setState({offline_msg: "YOU ARE OFFLINE."});
+      this.setState({blockNumber: 'OFFLINE'});
+    }
     //filter here seems like "non"-react way to do things.
     //TXComponent inherits blocknumber. Use that instead.
     web3.eth.filter('latest', function(error, result){
@@ -68,6 +74,7 @@ let App = React.createClass({
     });
   },
   checkBlockNumber: function() {
+      //console.log(web3);
       var nbn = web3.eth.blockNumber;
       if(nbn > this.state.blockNumber) {
         console.log(nbn);
@@ -79,7 +86,7 @@ let App = React.createClass({
       <div className="container">
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
-            <NavBar blockNumber={this.state.blockNumber}/>
+            <NavBar blockNumber={this.state.blockNumber} offline_msg={this.state.offline_msg}/>
             {this.props.children}
           </div>
         </div>
@@ -90,7 +97,7 @@ let App = React.createClass({
 
 window.onload = function() {
   // check if RPC is online. Why though?
-  web3.eth.getCoinbase(function(error, coinbase) {
+  //web3.eth.getCoinbase(function(error, coinbase) {
     //window.MainRouter = Router;
     Standard_Token.load(Pudding);
     //console.log(Standard_Token.prototype.binary);
@@ -107,5 +114,5 @@ window.onload = function() {
       </Router>
     ), document.getElementById('main'));
 
-  });
+  //});
 };
