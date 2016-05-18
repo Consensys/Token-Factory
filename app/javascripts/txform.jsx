@@ -9,7 +9,7 @@ var TxForm = React.createClass({
     return {
       processing: false,
       txHash: '',
-      txArgs: {},
+      txArgs: [],
     };
   },
   componentDidUpdate: function() {
@@ -19,13 +19,21 @@ var TxForm = React.createClass({
       console.log(result);
     });*/
     if(this.state.processing == true) {
+      console.log('processing');
       for(var i = 0; i < this.props.received.length; i+=1) {
+        console.log('iterating received');
         if(this.props.received[i].receipt.transactionHash == this.state.txHash) {
           console.log(this.props.received[i].receipt);
           //console.log(web_l.eth.blockNumber);
           this.setState({processing: false});
           console.log('processed');
+
+          //todo: txArgs do NOT persist over page refreshes.
+          //this should be shifted to localstorage.
+          //for now if txArgs is empty, run success update, but in success funciton, just say "success!" not with details
+          //very edge case-y atm, so delay until after alpha.
           this.props.successful(this.state.txArgs, this.props.received[i].receipt); //successful transaction with these arguments
+          this.setState({txArgs: []});
         }
       }
     } else {
@@ -34,7 +42,7 @@ var TxForm = React.createClass({
         this.setState({processing: true});
         //this seems dangerous! Assumes only 1 tx at a time.
         //revise
-        this.setState({txHash: this.props.pending[0].data.hash});
+        this.setState({txHash: "0x" + this.props.pending[0].data.hash});
       } /*else if (this.props.received.length > 0) {
         this.setState({processing: true});
         this.setState({txHash: this.props.received[0].receipt.transactionHash});

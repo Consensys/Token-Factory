@@ -34,6 +34,7 @@ var TokenPage = React.createClass({
   successOnBalance: function(result, args) {
     //call when balanceOf call succeeds.
     //args[0] = address
+    //don't need to check args since it is a sync call
     console.log(result);
     var balance_result = <div>Balance of {args[0]} is {result.c[0]}. </div>
     this.setState({balance_result: balance_result});
@@ -42,7 +43,9 @@ var TokenPage = React.createClass({
     //call when transfer succeeds.
     //args[0] = to address
     //args[1] = amount
-    var transfer_result = <div>{args[1]} has been transferred to {args[0]}. </div>
+    if(args.length > 0) {
+      var transfer_result = <div>{args[1]} has been transferred to {args[0]}. </div>
+    } else { var transfer_result = <div>Tokens were successfully transferred.</div> }
     this.setState({transfer_result: transfer_result});
   },
   successOnTransferFrom: function(args, receipt) {
@@ -50,20 +53,25 @@ var TokenPage = React.createClass({
     //args[0] = from address
     //args[1] = to address
     //args[2] = amount
-    var transferFrom_result = <div>{args[2]} has been transferred to {args[1]} from {args[0]}. </div>
+    if(args.length > 0) {
+      var transferFrom_result = <div>{args[2]} has been transferred to {args[1]} from {args[0]}. </div>
+    } else { var transferFrom_result = <div>Tokens were succesfully transferred.</div> }
     this.setState({transferFrom_result: transferFrom_result});
   },
   successOnApproval: function(args, receipt) {
     //call when approval succeeds.
     //args[0] = to address
     //args[1] = amount
-    var approve_result = <div>{args[1]} has been approved to withdraw an amount of {args[1]}. </div>
+    if(args.length > 0) {
+      var approve_result = <div>{args[1]} has been approved to withdraw an amount of {args[1]}. </div>
+    } else { var approve_result = <div> Tokens have been approved </div> }
     this.setState({approve_result: approve_result});
   },
   successOnAllowance: function(result, args) {
     //call when allowance call succeeds.
     //args[0] = address 1 (owner)
     //args[1] = address 2 (spender)
+    //no need to check args as this is a sync call
     var allowance_result = <div>{args[1]} is allowed to spend {result.c[0]} from {args[0]}</div>
     this.setState({allowance_result: allowance_result});
   },
