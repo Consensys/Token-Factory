@@ -67,22 +67,26 @@ var TxForm = React.createClass({
     if(typeof this.props.web3_token == 'undefined') {
       //token creation execution
       console.log('creating');
-      var ST = web3.eth.contract(Standard_Token.abi);
+      var ST = web3.eth.contract(HumanStandardToken.abi);
       var tx_hash = null;
       var that = this;
-      //var creation_data = ST.new.getData(args[0], {data: Standard_Token.binary});
+      //var creation_data = ST.new.getData(args[0], {data: HumanStandardToken.binary});
       console.log(web3);
       web3.eth.getAccounts(function(err, accounts){
         var addr = accounts[0];
         console.log(addr);
         console.log(ST);
-        console.log(Standard_Token.abi);
-        console.log("0x"+Standard_Token.prototype.binary);
+        console.log(HumanStandardToken.abi);
+        console.log("0x"+HumanStandardToken.prototype.binary);
         //TODO: change gas price
-        var creation_data = ST.new.getData(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gasPrice: 50000000000, gas: 3100000});
+        //args[0] = uint256 _initialAmount,
+        //args[1] = string _tokenName,
+        //args[2] = uint8 _decimalUnits,
+        //args[3] = string _tokenSymbol
+        var creation_data = ST.new.getData(args[0], args[1], args[2], args[3], {from: addr, data: "0x" + HumanStandardToken.prototype.binary, gasPrice: 50000000000, gas: 3100000});
         console.log(creation_data);
         console.log(args[0]);
-        ST.new(args[0], {from: addr, data: "0x" + Standard_Token.prototype.binary, gasPrice: 50000000000, gas: 1000000}, function(err, result) {
+        ST.new(args[0], args[1], args[2], args[3], {from: addr, data: "0x" + HumanStandardToken.prototype.binary, gasPrice: 50000000000, gas: 1000000}, function(err, result) {
           //NOTE: This callback fires twice. Once tx hash comes in. Then when mined.
           if(err) {
             console.log(err);

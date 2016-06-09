@@ -1,8 +1,7 @@
 {
   "build": "webpack",
   "deploy": [
-    "Standard_Token",
-    "Standard_Token_Factory"
+    "HumanStandardToken"
   ],
   "rpc": {
     // Default RPC configuration.

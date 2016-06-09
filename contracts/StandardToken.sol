@@ -1,17 +1,15 @@
-/*Most, basic default, standardised Token contract.
-Allows the creation of a token with a finite issued amount to the creator.
+/*
+This implements ONLY the standard functions and NOTHING else.
+For a token like you would want to deploy in something like Mist, see HumanStandardToken.sol.
 
-Based on standardised APIs: https://github.com/ethereum/wiki/wiki/Standardized_Contract_APIs
+If you deploy this, you won't have anything useful.
+
+Implements ERC 20 Token standard: https://github.com/ethereum/EIPs/issues/20
 .*/
 
 import "Token.sol";
 
-contract Standard_Token is Token {
-
-    function Standard_Token(uint256 _initial_amount) {
-        balances[msg.sender] = _initial_amount;
-        total_supply = _initial_amount;
-    }
+contract StandardToken is Token {
 
     function transfer(address _to, uint256 _value) returns (bool success) {
         //Default assumes totalSupply can't be over max (2^256 - 1).
@@ -26,17 +24,14 @@ contract Standard_Token is Token {
         } else { return false; }
     }
 
-    //NOTE: This function suffers from a bug atm. It is a hack. It only works if the calls are arranged as is below.
-    //Here be dragons. Not sure if VM or Solidity bug. More testing needs to be done.
-    //See: https://github.com/ethereum/solidity/issues/281
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
         //same as above. Replace this line with the following if you want to protect against wrapping uints.
         //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
         if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && _value > 0) {
             balances[_to] += _value;
-            Transfer(_from, _to, _value);
             balances[_from] -= _value;
             allowed[_from][msg.sender] -= _value;
+            Transfer(_from, _to, _value);
             return true;
         } else { return false; }
     }
@@ -55,11 +50,7 @@ contract Standard_Token is Token {
       return allowed[_owner][_spender];
     }
 
-    function totalSupply() constant returns (uint256 _total) {
-        return total_supply;
-    }
-
     mapping (address => uint256) balances;
     mapping (address => mapping (address => uint256)) allowed;
-    uint256 total_supply;
+    uint256 public totalSupply;
 }

@@ -17,11 +17,16 @@ var FactoryPage = React.createClass({
         <TXComponent filter={{txType: "token_creation"}}>
           <TxForm txType = "token_creation"
                   header = "Create Token"
-                  msg = "Create Token Contract with the following initial amount."
+                  msg = "Create Token Contract with the following parameters."
                   buttonAction = "Create Token"
                   buttonProcessing = "Creating Token"
                   successful = {this.successOnCreation}
-                  inputs = {[{placeholder: "amount: eg. 10", key: "amount", ref: "amount"}]}
+                  inputs = {[{placeholder: "totaly supply: eg. 10", key: "amount", ref: "amount"},
+                             {placeholder: "name: eg Simon Bucks", key: "name", ref: "name"},
+                             {placeholder: "decimal places: eg 4", key: "decimals", ref: "decimals"},
+                             {placeholder: "symbol: eg SBX", key: "symbol", ref: "symbol"},
+
+                  ]}
             />
         </TXComponent> <br />
       </div>

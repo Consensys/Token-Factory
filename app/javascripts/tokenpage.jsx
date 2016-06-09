@@ -14,21 +14,33 @@ var TokenPage = React.createClass({
       transferFrom_result: '',
       approve_result: '',
       allowance_result: '',
+      token_decimals: '',
+      token_name: '',
+      token_symbol: ''
     };
   },
   componentDidMount: function() {
     this.setState({contract_address: this.props.params.contract_address});
-    //var web3_token = web3_rab.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
-    var web3_token = web3.eth.contract(Standard_Token.abi).at(this.props.params.contract_address); //for reflux-tx
+    //var web3_token = web3_rab.eth.contract(HumanStandardToken.abi).at(this.props.params.contract_address); //for reflux-tx
+    var web3_token = web3.eth.contract(HumanStandardToken.abi).at(this.props.params.contract_address); //for reflux-tx
     window.token_c = web3_token;
     this.setState({web3_token: web3_token});
     var that = this;
     web3.eth.getAccounts(function(err, accounts){
       var addr = accounts[0];
+      console.log(addr);
       var totalSupply = web3_token.totalSupply.call({from: addr});
       console.log(totalSupply);
+
       that.setState({totalSupply: totalSupply.c[0]});
       that.setState({current_user_address: addr});
+      var decimals = web3_token.decimals.call({from: addr});
+      var symbol = web3_token.symbol.call({from: addr});
+      var name = web3_token.name.call({from: addr});
+      if(decimals) { that.setState({token_decimals: decimals}); }
+      if(symbol) { that.setState({token_symbol: symbol}); }
+      if(name) { that.setState({token_name: name}); }
+      console.log(decimals + symbol + name);
     });
   },
   successOnBalance: function(result, args) {
@@ -77,11 +89,20 @@ var TokenPage = React.createClass({
   },
   render: function() {
     //return error if not actual token system.
+    var transfer_header = '';
+    if(this.state.token_name != '') { transfer_header = "Transfer " + this.state.token_name; } else { transfer_header = "Transfer Token"; }
+
+    var top_header = '';
+    if(this.state.token_symbol != '') {
+      top_header = <span><h2>{this.state.token_name} ({this.state.token_symbol})</h2> <br /></span>;
+    }
+
+    //Current User Address & Balance: {this.state.current_user_address}. <br />
     return (
       <div>
+        {top_header}
         Interacting with token at address: {this.state.contract_address}. <br />
         Total Supply is: {this.state.totalSupply}. <br />
-      Current User Address & Balance: {this.state.current_user_address}. <br />
         <br />
         <div className="form-group">
           <TXComponent filter={{txType: "transfer"}}>
@@ -89,7 +110,7 @@ var TokenPage = React.createClass({
                     txStyle = "transaction"
                     txType = "transfer"
                     abiFunction = "transfer"
-                    header = "Transfer Token"
+                    header = {transfer_header}
                     msg = "Transfer to another account."
                     buttonAction = "Transfer Amount"
                     buttonProcessing = "Transferring Amount"

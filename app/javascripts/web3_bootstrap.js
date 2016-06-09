@@ -12,8 +12,8 @@ if (typeof web3 !== 'undefined') {
   exported = new Web3(web3.currentProvider);
   window.offline = false; //there is a web3 available.
 
-  //var other_web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
-  //window.web_l = other_web3;
+  var other_web3 = new Web3(new Web3.providers.HttpProvider('https://rpc.metamask.io'));
+  window.web_l = other_web3;
 } else {
   // Use the provider from the config.
   // ENV and WEB3_PROVIDER_LOCATION are rewritten by webpack during build

@@ -101,8 +101,7 @@ window.onload = function() {
   // check if RPC is online. Why though?
   //web3.eth.getCoinbase(function(error, coinbase) {
     //window.MainRouter = Router;
-    Standard_Token.load(Pudding);
-    //console.log(Standard_Token.prototype.binary);
+    HumanStandardToken.load(Pudding);
 
     ReactDOM.render((
     //React.render((
