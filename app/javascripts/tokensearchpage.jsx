@@ -12,9 +12,9 @@ var TokenSearchPage = React.createClass({
   render: function() {
     return (
       <div>
-        Enter Address of Token System: <br />
+        Enter the address of the token contract you want to interact with: <br />
         <br />
-        <input className="form-control" type="text" value={this.state.value} placeholder="0xdeadbeef..." onChange={this.handleChange}/>
+        <input className="form-control" type="text" value={this.state.value} placeholder="0x1ceb00da..." onChange={this.handleChange}/>
         <br />
         <button className="btn btn-default" onClick={this.executeFunction}>Go to Token</button>
       </div>

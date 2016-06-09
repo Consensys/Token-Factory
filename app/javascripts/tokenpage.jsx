@@ -115,7 +115,7 @@ var TokenPage = React.createClass({
                     buttonAction = "Transfer Amount"
                     buttonProcessing = "Transferring Amount"
                     successful = {this.successOnTransfer}
-                    inputs = {[{placeholder: "to: eg 0xdeadbeef", key: "address", ref: "address"},
+                    inputs = {[{placeholder: "to: eg 0x1ceb00da", key: "address", ref: "address"},
                               {placeholder: "amount: eg. 10", key: "amount", ref: "amount"}]}
               />
           </TXComponent> <br />
@@ -132,7 +132,7 @@ var TokenPage = React.createClass({
                   buttonAction = "Approve Amount"
                   buttonProcessing = "Approving Amount"
                   successful = {this.successOnApproval}
-                  inputs = {[{placeholder: "to: eg 0xdeadbeef", key: "address", ref: "address"},
+                  inputs = {[{placeholder: "to: eg 0x1ceb00da", key: "address", ref: "address"},
                             {placeholder: "amount: eg. 10", key: "amount", ref: "amount"}]}
             />
         </TXComponent> <br />
@@ -148,7 +148,7 @@ var TokenPage = React.createClass({
                 buttonAction = "Check Balance"
                 buttonProcessing = "Checking Balance"
                 successful = {this.successOnBalance}
-                inputs = {[{placeholder: "to: eg 0xdeadbeef", key: "address", ref: "address"}]}
+                inputs = {[{placeholder: "to: eg 0x1ceb00da", key: "address", ref: "address"}]}
         />
       </TXComponent> <br />
     {this.state.balance_result} <br />
@@ -163,8 +163,8 @@ var TokenPage = React.createClass({
                   buttonAction = "Transfer Allowance"
                   buttonProcessing = "Transferring Allowance"
                   successful = {this.successOnTransferFrom}
-                  inputs = {[{placeholder: "from: eg 0xdeadbeef", key: "fromAddress", ref: "fromAddress" },
-                            {placeholder: "to: eg 0xdeadbeef", key: "toAddress", ref: "toAddress" },
+                  inputs = {[{placeholder: "from: eg 0x1ceb00da", key: "fromAddress", ref: "fromAddress" },
+                            {placeholder: "to: eg 0x1ceb00da", key: "toAddress", ref: "toAddress" },
                             {placeholder: "amount: eg 10", key: "amount", ref: "amount" }]}
           />
         </TXComponent> <br />
@@ -180,8 +180,8 @@ var TokenPage = React.createClass({
                 buttonAction = "Check Allowance"
                 buttonProcessing = "Checking Allowance"
                 successful = {this.successOnAllowance}
-                inputs = {[{placeholder: "owner: eg 0xdeadbeef", key: "fromAddress", ref: "fromAddress"},
-                          {placeholder: "spender: eg 0xdeadbeef", key: "toAddress", ref: "toAddress" }]}
+                inputs = {[{placeholder: "owner: eg 0x1ceb00da", key: "fromAddress", ref: "fromAddress"},
+                          {placeholder: "spender: eg 0x1ceb00da", key: "toAddress", ref: "toAddress" }]}
         />
     </TXComponent> <br />
   {this.state.allowance_result}
