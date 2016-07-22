@@ -26,21 +26,24 @@ var TokenPage = React.createClass({
     window.token_c = web3_token;
     this.setState({web3_token: web3_token});
     var that = this;
-    web3.eth.getAccounts(function(err, accounts){
-      var addr = accounts[0];
-      console.log(addr);
-      var totalSupply = web3_token.totalSupply.call({from: addr});
-      console.log(totalSupply);
 
-      that.setState({totalSupply: totalSupply.c[0]});
-      that.setState({current_user_address: addr});
-      var decimals = web3_token.decimals.call({from: addr});
-      var symbol = web3_token.symbol.call({from: addr});
-      var name = web3_token.name.call({from: addr});
-      if(decimals) { that.setState({token_decimals: decimals}); }
-      if(symbol) { that.setState({token_symbol: symbol}); }
-      if(name) { that.setState({token_name: name}); }
-      console.log(decimals + symbol + name);
+    var accounts = web3.eth.accounts;
+    var addr = accounts[0];
+    web3_token.totalSupply.call({from: addr}, function(err, totalSupply) {
+
+        console.log(totalSupply);
+        that.setState({totalSupply: totalSupply.c[0]});
+    });
+
+    that.setState({current_user_address: addr});
+    web3_token.decimals.call({from: addr}, function(err, decimals) {
+        if(decimals) { that.setState({token_decimals: decimals}); }
+    });
+    web3_token.symbol.call({from: addr}, function(err, symbol) {
+        if(symbol) { that.setState({token_symbol: symbol}); }
+    });
+    web3_token.name.call({from: addr}, function(err, name) {
+        if(name) { that.setState({token_name: name}); }
     });
   },
   successOnBalance: function(result, args) {
