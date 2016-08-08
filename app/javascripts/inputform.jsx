@@ -1,5 +1,9 @@
 import React from "react";
 
+/*
+A generic component for an input field.
+*/
+
 var InputForm = React.createClass({
   getInitialState: function() {
     return {

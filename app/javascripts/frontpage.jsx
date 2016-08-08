@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+/*
+Home/front page.
+Warns if offline and recommends to install Metamask to use it.
+*/
+
 var FrontPage = React.createClass({
   getInitialState: function() {
     return {

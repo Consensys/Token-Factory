@@ -2,6 +2,11 @@ import React from "react";
 import {TXComponent} from "reflux-tx";
 import TxForm from "./txform.jsx";
 
+/*
+Page to create/issue a token.
+Upon success/mined, forward to token wallet page.
+*/
+
 var FactoryPage = React.createClass({
   getInitialState: function() {
     return {

@@ -4,6 +4,8 @@ A dapp that allows for token issuance & management. The purpose for this at this
 
 Contracts & Tests are borrowed from Tokens repo. Using Truffle (with Webpack).  
 
+NOTE: Currently broken (due to Truffle bug) and busy refactoring (UNTESTED).
+
 ```npm install```   
 ```truffle serve```
 

@@ -6,14 +6,10 @@ import ReactRouter from "react-router";
 import { Router, Route, IndexRoute, Link } from 'react-router';
 import { TXActions } from 'reflux-tx';
 import {TXComponent} from "reflux-tx";
-//import TXActions from "reflux-tx".TXActions;
-//import TXComponent from "reflux-tx".TXComponent;
-//import AccountBadge from "react-account-badge";
-var web3 = require("./web3_bootstrap.js");
-window.web3 = web3; //hacky way to force checked web3 to be used everywhere vs accidentally using injected web3.
-//import Web3 from "web3";
 
-//web3? Apparently it is "provided"?
+//hacky way to force checked web3 to be used everywhere vs accidentally using injected web3.
+var web3 = require("./web3_bootstrap.js"); //thus injected web3 is now web3 in this scope.
+window.web3 = web3; //overwrite injected web3 with replaced one.
 
 import NavBar from "./navbar.jsx";
 import FactoryPage from "./factorypage.jsx";
@@ -22,36 +18,17 @@ import TokenPage from "./tokenpage.jsx";
 import TokenSearchPage from "./tokensearchpage.jsx";
 require('bootstrap-webpack!./bootstrap.config.js');
 var $ = require('jquery');
-//console.log($);
 
-
-//feels like webpack anti-pattern??
-//window.Route = ReactRouter.Route;
-//window.Router = ReactRouter.Router;
-//window.IndexRoute = ReactRouter.IndexRoute;
-//window.Link = ReactRouter.Link;
-
-//window.TXActions = refluxTX.TXActions;
-//window.TXComponent = refluxTX.TXComponent;
-//console.log(TXActions);
+//TXActions/Reflux-TX is a lib that keeps track of txes across page refreshes.
+//bufferSize = how many txes to store at once.
 TXActions.connect(web3, {confirmCount: 1, bufferSize: 5})
-
-//window.web3_rab = new Web3();
-//console.log(web3);
-//web3 = new Web3();
-//web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545')); //default provider until overwritten.
-
-//window.AccountBadge = accountBadge.AccountBadge;
-//window.AccountStore = accountBadge.AccountStore;
 
 //remove _k thing from URLS (removing queryKey)
 import createHistory from 'history/lib/createHashHistory';
-//window.histor = History.createHashHistory({
+
 let history = createHistory({
   queryKey: false
 });
-
-
 
 let App = React.createClass({
   getInitialState: function() {
@@ -61,6 +38,7 @@ let App = React.createClass({
     };
   },
   componentDidMount: function() {
+    //when mounting check if online/offline
 
     var that = this;
     if(window.offline == true) {
@@ -69,8 +47,6 @@ let App = React.createClass({
       this.setState({blockNumber: 'OFFLINE'});
     }
 
-
-    //TODO: log current address in here instead with a timeout
   },
   render: function() {
     return (
@@ -89,22 +65,18 @@ let App = React.createClass({
 });
 
 window.onload = function() {
-  // check if RPC is online. Why though?
-  //web3.eth.getCoinbase(function(error, coinbase) {
-    //window.MainRouter = Router;
-    HumanStandardToken.load(Pudding);
+  HumanStandardToken.load(Pudding);
 
-    ReactDOM.render((
-    //React.render((
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={FrontPage} />
-          <Route path="/tokensearch" component={TokenSearchPage} />
-          <Route path="/factory" component={FactoryPage} />
-          <Route path="/token/:contract_address" component={TokenPage} />
-        </Route>
-      </Router>
-    ), document.getElementById('main'));
+  ReactDOM.render((
+  //React.render((
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={FrontPage} />
+        <Route path="/tokensearch" component={TokenSearchPage} />
+        <Route path="/factory" component={FactoryPage} />
+        <Route path="/token/:contract_address" component={TokenPage} />
+      </Route>
+    </Router>
+  ), document.getElementById('main'));
 
-  //});
 };

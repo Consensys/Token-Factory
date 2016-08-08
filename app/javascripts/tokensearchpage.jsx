@@ -1,5 +1,9 @@
 import React from "react";
 
+/*
+Simple forwarding tool to simply forward to a token page when putting in an address so the user don't have to fiddle with the URL.
+*/
+
 var TokenSearchPage = React.createClass({
   getInitialState: function() {
     return {

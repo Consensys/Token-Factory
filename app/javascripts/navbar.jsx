@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
-//import AccountBadge from "react-account-badge";
-//<AccountBadge web3={web3_rab} />
+
+/*
+Basic navbar.
+Shows dynamic block number for good UX
+*/
+
+//TODO: Re-add account badge if on mobile.
+
 var NavBar = React.createClass({
   render: function() {
     return (

@@ -2,6 +2,15 @@ import React from "react";
 import {TXComponent} from "reflux-tx";
 import TxForm from "./txform.jsx";
 
+/*
+Token wallet page. How you interact with a standard token.
+
+When issuing a tx, the button will display that it is loading/waiting until finished.
+Next to button/input field, the result will be displayed if finished.
+
+Currently, since decimals, name & symbol are optionals, one needs to check if the specified code at the address have these, before proceeding.
+*/
+
 var TokenPage = React.createClass({
   getInitialState: function() {
     return {
@@ -21,30 +30,49 @@ var TokenPage = React.createClass({
   },
   componentDidMount: function() {
     this.setState({contract_address: this.props.params.contract_address});
-    //var web3_token = web3_rab.eth.contract(HumanStandardToken.abi).at(this.props.params.contract_address); //for reflux-tx
+
+    //it is going to want to try and use HumanStandardToken ABI, hoping that is this ERC20 version of the token.
     var web3_token = web3.eth.contract(HumanStandardToken.abi).at(this.props.params.contract_address); //for reflux-tx
-    window.token_c = web3_token;
+    window.token_c = web3_token; //for debugging
     this.setState({web3_token: web3_token});
     var that = this;
 
-    var accounts = web3.eth.accounts;
-    var addr = accounts[0];
+    var accounts = web3.eth.accounts; //get Metamask/Mist address
+    var addr = accounts[0]; //first account in metamask is one that's active. Might have to swop/change for Mist in the future.
     web3_token.totalSupply.call({from: addr}, function(err, totalSupply) {
-
+        //expect this. so throw that it is NOT an ERC token.
+        //TODO ^^
         console.log(totalSupply);
-        that.setState({totalSupply: totalSupply.c[0]});
+        that.setState({totalSupply: totalSupply.toString()});
     });
 
     that.setState({current_user_address: addr});
-    web3_token.decimals.call({from: addr}, function(err, decimals) {
-        if(decimals) { that.setState({token_decimals: decimals}); }
+
+    //optionals. So don't throw.
+    //only omit them
+
+    /*web3_token.decimals.call({from: addr}, function(err, decimals) {
+        //ABI will force it to expect BigNumber.
+        //because it throws via fallback function if not present, it gets back 0.
+        if(err) { console.log(err); }
+        if(decimals) { console.log(decimals); that.setState({token_decimals: decimals}); }
     });
-    web3_token.symbol.call({from: addr}, function(err, symbol) {
-        if(symbol) { that.setState({token_symbol: symbol}); }
-    });
+
+    console.log(web3_token);
+    try {
+      web3_token.symbol.call({from: addr}, function(err, symbol) {
+          //ABI expects string here,
+          if(err) { console.log("ERROR BRUV"); }
+          if(symbol) { console.log(symbol); that.setState({token_symbol: symbol}); }
+      });
+    } catch(err) {
+      console.log("symbol jarring");
+    }?
+    /*
     web3_token.name.call({from: addr}, function(err, name) {
-        if(name) { that.setState({token_name: name}); }
-    });
+        if(err) { console.log(err); }
+        if(name) { console.log(name); that.setState({token_name: name}); }
+    });*/
   },
   successOnBalance: function(result, args) {
     //call when balanceOf call succeeds.
@@ -91,7 +119,7 @@ var TokenPage = React.createClass({
     this.setState({allowance_result: allowance_result});
   },
   render: function() {
-    //return error if not actual token system.
+    //if name & symbol exists, use them.
     var transfer_header = '';
     if(this.state.token_name != '') { transfer_header = "Transfer " + this.state.token_name; } else { transfer_header = "Transfer Token"; }
 
@@ -100,7 +128,10 @@ var TokenPage = React.createClass({
       top_header = <span><h2>{this.state.token_name} ({this.state.token_symbol})</h2> <br /></span>;
     }
 
-    //Current User Address & Balance: {this.state.current_user_address}. <br />
+    /*
+    TXComponent is from reflux-tx to monitor tx state. Wrapping components with it, means those components can monitor those tx states.
+    */
+
     return (
       <div>
         {top_header}
@@ -187,7 +218,7 @@ var TokenPage = React.createClass({
                           {placeholder: "spender: eg 0x1ceb00da", key: "toAddress", ref: "toAddress" }]}
         />
     </TXComponent> <br />
-  {this.state.allowance_result}
+    {this.state.allowance_result}
 
       </div>
     );
