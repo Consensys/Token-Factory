@@ -65,7 +65,6 @@ let App = React.createClass({
 });
 
 window.onload = function() {
-  HumanStandardToken.load(Pudding);
 
   ReactDOM.render((
   //React.render((

@@ -19,9 +19,9 @@ if (typeof web3 !== 'undefined') {
   console.log("THUS. Offline flag remains TRUE.");
 
   //ONLY set web3 for its functions, not for its connection
-  exported = new Web3();
+  exported_web3 = new Web3();
 }
 
-Pudding.setWeb3(exported); //Pudding requires a web3 connection
-window.exported = exported; //used for debugging purposes to get access to web3 ie exported.eth.<blah blah blah>
-module.exports = exported;
+Pudding.setWeb3(exported_web3); //Pudding requires a web3 connection
+window.exported = exported_web3; //used for debugging purposes to get access to web3 ie exported.eth.<blah blah blah>
+module.exports = exported_web3;

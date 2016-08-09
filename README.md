@@ -2,9 +2,7 @@
 
 A dapp that allows for token issuance & management. The purpose for this at this point in time is to be nerdy & decentralized for MVP. Thus should be able to be run locally & remote or just through contracts.
 
-Contracts & Tests are borrowed from Tokens repo. Using Truffle (with Webpack).  
-
-NOTE: Currently broken (due to Truffle bug) and busy refactoring (UNTESTED).
+Contracts & Tests are borrowed from Tokens repo. Using Truffle (with Webpack). Tested with Truffle 48bd90d06fef9a90ec058159f01e192ea8c36e51.
 
 ```npm install```   
 ```truffle serve```
