@@ -51,28 +51,26 @@ var TokenPage = React.createClass({
     //optionals. So don't throw.
     //only omit them
 
-    /*web3_token.decimals.call({from: addr}, function(err, decimals) {
+    //TODO: For now, this will break for any token that does NOT have decimals, name or symbol.
+    //One need to do a function signature regex to determine if it's in there or not.
+
+    web3_token.decimals.call({from: addr}, function(err, decimals) {
         //ABI will force it to expect BigNumber.
         //because it throws via fallback function if not present, it gets back 0.
         if(err) { console.log(err); }
         if(decimals) { console.log(decimals); that.setState({token_decimals: decimals}); }
     });
 
-    console.log(web3_token);
-    try {
-      web3_token.symbol.call({from: addr}, function(err, symbol) {
+    web3_token.symbol.call({from: addr}, function(err, symbol) {
           //ABI expects string here,
           if(err) { console.log("ERROR BRUV"); }
           if(symbol) { console.log(symbol); that.setState({token_symbol: symbol}); }
-      });
-    } catch(err) {
-      console.log("symbol jarring");
-    }?
-    /*
+    });
+
     web3_token.name.call({from: addr}, function(err, name) {
         if(err) { console.log(err); }
         if(name) { console.log(name); that.setState({token_name: name}); }
-    });*/
+    });
   },
   successOnBalance: function(result, args) {
     //call when balanceOf call succeeds.
