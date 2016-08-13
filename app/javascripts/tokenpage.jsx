@@ -33,6 +33,7 @@ var TokenPage = React.createClass({
 
     //it is going to want to try and use HumanStandardToken ABI, hoping that is this ERC20 version of the token.
     var web3_token = web3.eth.contract(HumanStandardToken.abi).at(this.props.params.contract_address); //for reflux-tx
+    console.log(web3_token);
     window.token_c = web3_token; //for debugging
     this.setState({web3_token: web3_token});
     var that = this;
