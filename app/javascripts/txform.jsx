@@ -103,8 +103,15 @@ var TxForm = React.createClass({
     } else {
       //if normal interaction with token.
       if(this.props.txStyle == "call") {
+        //pushing callback into the args
+        var that = this;
+        args.push(function(err, result) {
+          if(!err) {
+            console.log(result);
+            that.props.successful(result, args); //fires callback function.
+          }
+        });
         var result = this.props.web3_token[this.props.abiFunction].call.apply(this, args);
-        this.props.successful(result, args); //fires callback function.
       }
       else if(this.props.txStyle == "transaction") {
         var that = this;
