@@ -9,6 +9,35 @@ Shows dynamic block number for good UX
 //TODO: Re-add account badge if on mobile.
 
 var NavBar = React.createClass({
+  getInitialState: function() {
+    return {
+      current_blocknr: 0,
+      current_timestamp: 0,
+      time_diff: 0
+    };
+  },
+  componentDidMount: function() {
+    var that = this;
+    window.setInterval(function(){
+      var ts = that.state.current_timestamp;
+      var now = Math.floor(Date.now()/1000);
+      web3.eth.getBlock("latest", function(err, result) {
+        if(result.number > that.state.current_blocknr) {
+          that.setState({current_blocknr: result.number});
+          that.setState({current_timestamp: now});
+          ts = now;
+        }
+      });
+      
+      if(ts > 0) {
+        that.setState({time_diff: now - ts});
+      }
+    }, 1000);
+  },
+  componentDidUpdate: function() {
+    //problem of relying on reflux-tx is that reflux-tx only updates blocks when it is actively having a tx in it.
+    //so have to resort to manual checking.
+  },
   render: function() {
     return (
       <div>
@@ -22,7 +51,7 @@ var NavBar = React.createClass({
                 <span className="icon-bar"></span>
               </button>
               <a className="navbar-brand" href="#"><img height="25px" src="./images/icon.png"></img></a>
-              <p className="navbar-text" style={{textDecoration: 'underline'}}>Block Number: {this.props.blockNumber}</p>
+              <p className="navbar-text" style={{textDecoration: 'underline'}}>Block Number: {this.state.current_blocknr}. {this.state.time_diff}s. </p>
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
