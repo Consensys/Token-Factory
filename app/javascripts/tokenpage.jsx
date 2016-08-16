@@ -39,9 +39,9 @@ var TokenPage = React.createClass({
     this.setState({web3_token: web3_token});
     var that = this;
 
-    var accounts = web3.eth.accounts; //get Metamask/Mist address
-    var addr = accounts[0]; //first account in metamask is one that's active. Might have to swop/change for Mist in the future.
-    web3_token.totalSupply.call({from: addr}, function(err, totalSupply) {
+    web3.eth.getAccounts(function (err, accounts) { //get Metamask/Mist address
+      var addr = accounts[0]; //first account in metamask is one that's active. Might have to swop/change for Mist in the future.
+      web3_token.totalSupply.call({from: addr}, function(err, totalSupply) {
         console.log(totalSupply);
         that.setState({totalSupply: totalSupply.toString()});
 
@@ -49,49 +49,50 @@ var TokenPage = React.createClass({
         if(totalSupply.toString() === "0") {
           that.setState({valid: false});
         }
-    });
+      });
 
-    that.setState({current_user_address: addr});
+      that.setState({current_user_address: addr});
 
-    //totalSupply is currently used to check if legitimate ERC20.
-    //optionals currently are the vanity vars: decimals, symbol and name.
-    //the token can still work, thus if not present they aren't currently shown or added to the UI.
+      //totalSupply is currently used to check if legitimate ERC20.
+      //optionals currently are the vanity vars: decimals, symbol and name.
+      //the token can still work, thus if not present they aren't currently shown or added to the UI.
 
-    //decimals() signature: 0x313ce567
-    //name() signature: 0x06fdde03
-    //symbol() signature: 0x95d89b41
-    var decimals_sig = "13ce567";
-    var name_sig = "06fdde03";
-    var symbol_sig = "95d89b41";
+      //decimals() signature: 0x313ce567
+      //name() signature: 0x06fdde03
+      //symbol() signature: 0x95d89b41
+      var decimals_sig = "13ce567";
+      var name_sig = "06fdde03";
+      var symbol_sig = "95d89b41";
 
 
-    web3.eth.getCode(this.props.params.contract_address, function(err, result) {
-      //console.log(result);
+      web3.eth.getCode(that.props.params.contract_address, function(err, result) {
+        //console.log(result);
 
-      if(result.indexOf(decimals_sig) >= 0) {
-        console.log("decimals present");
-        web3_token.decimals.call({from: addr}, function(err, decimals) {
-          //ABI will force it to expect BigNumber.
-          //because it throws via fallback function if not present, it gets back 0.
-          if(err) { console.log(err); }
-          if(decimals) { console.log(decimals); that.setState({token_decimals: decimals}); }
-        });
-      }
-      if(result.indexOf(name_sig) >= 0) {
-        console.log("name present");
-        web3_token.name.call({from: addr}, function(err, name) {
-          if(err) { console.log(err); }
-          if(name) { console.log(name); that.setState({token_name: name}); }
-        });
-      }
-      if(result.indexOf(symbol_sig) >= 0) {
-        console.log("symbol present");
-        web3_token.symbol.call({from: addr}, function(err, symbol) {
-          //ABI expects string here,
-          if(err) { console.log(err); }
-          if(symbol) { console.log(symbol); that.setState({token_symbol: symbol}); }
-        });
-      }
+        if(result.indexOf(decimals_sig) >= 0) {
+          console.log("decimals present");
+          web3_token.decimals.call({from: addr}, function(err, decimals) {
+            //ABI will force it to expect BigNumber.
+            //because it throws via fallback function if not present, it gets back 0.
+            if(err) { console.log(err); }
+            if(decimals) { console.log(decimals); that.setState({token_decimals: decimals}); }
+          });
+        }
+        if(result.indexOf(name_sig) >= 0) {
+          console.log("name present");
+          web3_token.name.call({from: addr}, function(err, name) {
+            if(err) { console.log(err); }
+            if(name) { console.log(name); that.setState({token_name: name}); }
+          });
+        }
+        if(result.indexOf(symbol_sig) >= 0) {
+          console.log("symbol present");
+          web3_token.symbol.call({from: addr}, function(err, symbol) {
+            //ABI expects string here,
+            if(err) { console.log(err); }
+            if(symbol) { console.log(symbol); that.setState({token_symbol: symbol}); }
+          });
+        }
+      });
     });
   },
   successOnBalance: function(result, args) {
