@@ -28,6 +28,7 @@
     "reflux-tx": "0.2.4",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "uport-lib": "git+ssh://git@github.com:ConsenSys/uport-lib.git",
     "web3": "0.16.0",
     "webpack": "^1.12.12"
   },

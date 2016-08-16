@@ -1,6 +1,7 @@
 //for Mist & Metamask support
 var Web3 = require("web3");
 var Pudding = require("ether-pudding");
+var uportLib = require('uport-lib');
 var exported_web3 = null;
 
 window.offline = true; //default is there is no web3 available.
@@ -13,13 +14,11 @@ if (typeof web3 !== 'undefined') {
   window.offline = false; //there is a web3 available.
 
 } else {
-
-  console.log("A web3 provider is NOT present. Telling user to get one.");
-  console.log("For now. NOT connected to a localhost.");
-  console.log("THUS. Offline flag remains TRUE.");
-
-  //ONLY set web3 for its functions, not for its connection
-  exported_web3 = new Web3();
+  // Use uPort if MetaMask is not available
+  var uport = new uportLib("Token Factory");
+  var uportProvider = uport.getUportProvider();
+  exported_web3 = new Web3(uportProvider);
+  window.offline = false;
 }
 
 Pudding.setWeb3(exported_web3); //Pudding requires a web3 connection
