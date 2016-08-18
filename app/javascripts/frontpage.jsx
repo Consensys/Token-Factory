@@ -14,9 +14,15 @@ var FrontPage = React.createClass({
   },
   componentDidMount: function() {
   },
+  activateUPort: function() {
+    console.log("trying to activate");
+    localStorage["provider"] = "uport";
+    //window.offline = true;
+    location.reload(); //refresh
+  },
   render: function() {
     if(window.offline) {
-      var offline_msg = <span>You are currently OFFLINE. In order to use the Token Factory, you need to have <a href='https://metamask.io'>Metamask</a> installed.</span>
+      var offline_msg = <p>You are currently OFFLINE. <br /> In order to use the Token Factory, you need to have <a href='https://metamask.io'>Metamask</a> installed OR <button className="btn btn-default" onClick={this.activateUPort}>Activate uPort</button>.</p>
     }
     return (
       <div>

@@ -46,7 +46,7 @@ module.exports = {
       //{ test: /\.(js|jsx|es6)$/, loader: "babel-loader"},
       //{ test: /localforage\/dist\/localforage\.js/, loader: 'exports?localforage'},
       { test: /\.scss$/i, exclude: /node_modules/, loader: ExtractTextPlugin.extract(["css", "sass"])},
-      { test: /\.json$/i, loader: "json"},
+      { test: /\.json$/, loader: 'json-loader' },
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: [/bootstrap/, /font-awesome/], loader: 'url-loader?limit=10000&minetype=application/font-woff' },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, include: [/bootstrap/, /font-awesome/], loader: 'file-loader' }
     ],
@@ -71,6 +71,8 @@ module.exports = {
   //resolve: { fallback: path.join(__dirname, "node_modules") },
   //resolveLoader: { fallback: path.join(__dirname, "node_modules") },
   node: {
-    fs: "empty"
+    fs: "empty",
+    net: "empty",
+    tls: "empty"
   }
 };

@@ -28,7 +28,7 @@ var NavBar = React.createClass({
           ts = now;
         }
       });
-      
+
       if(ts > 0) {
         that.setState({time_diff: now - ts});
       }
@@ -38,7 +38,18 @@ var NavBar = React.createClass({
     //problem of relying on reflux-tx is that reflux-tx only updates blocks when it is actively having a tx in it.
     //so have to resort to manual checking.
   },
+  deactivateUPort: function() {
+    console.log("trying to deactivate");
+    localStorage["provider"] = "";
+    location.reload(true);
+  },
   render: function() {
+    var uport_deactivate = "";
+
+    if(localStorage["provider"] == "uport") {
+      //uport_deactivate = <a href="#" onClick={this.deactivateUPort}>Deactivate uPort</a>
+      uport_deactivate = <li><Link to={"/"} onClick={this.deactivateUPort}>Deactivate uPort</Link></li>
+    }
     return (
       <div>
         <nav style={{}} className="navbar navbar-default navbar-fixed-top">
@@ -59,6 +70,7 @@ var NavBar = React.createClass({
                 <li><Link to={'/'}>Home</Link></li>
                 <li><Link to={'/tokensearch'}>Interact With Token Contract</Link></li>
                 <li><Link to={'/factory'}>Create Token Contract</Link></li>
+                {uport_deactivate}
                 <li><p className="navbar-text" style={{color: 'red'}}>{this.props.offline_msg}</p></li>
               </ul>
             </div>
