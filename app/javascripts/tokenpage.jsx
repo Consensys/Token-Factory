@@ -39,7 +39,7 @@ var TokenPage = React.createClass({
     this.setState({web3_token: web3_token});
     var that = this;
 
-    var accounts = web3.eth.accounts(function(err, accounts) {
+    var accounts = web3.eth.getAccounts(function(err, accounts) {
       var addr = accounts[0]; //first account in metamask is one that's active. Might have to swop/change for Mist in the future.
       web3_token.totalSupply.call({from: addr}, function(err, totalSupply) {
           console.log(totalSupply);
@@ -65,7 +65,7 @@ var TokenPage = React.createClass({
       var symbol_sig = "95d89b41";
 
 
-      web3.eth.getCode(this.props.params.contract_address, function(err, result) {
+      web3.eth.getCode(that.props.params.contract_address, function(err, result) {
         //console.log(result);
 
         if(result.indexOf(decimals_sig) >= 0) {
