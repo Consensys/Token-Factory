@@ -22,7 +22,12 @@ var FrontPage = React.createClass({
   },
   render: function() {
     if(window.offline) {
-      var offline_msg = <p>You are currently OFFLINE. <br /> In order to use the Token Factory, you need to have <a href='https://metamask.io'>Metamask</a> installed OR <button className="btn btn-default" onClick={this.activateUPort}>Activate uPort</button>.</p>
+      var offline_msg = <p style={{textAlign: "center"}}>You are currently OFFLINE. <br /><br />
+      In order to use the Token Factory, you need to: <br />
+    <a style={{textAlign: "center"}} href="https://metamask.io"><img width="200px" className="logo img-responsive center-block" src="./images/mm.png"></img></a>
+      <h3 style={{textAlign: "center"}}>OR</h3>
+      <button style={{textAlign: "center"}} className="btn btn-default center-block" onClick={this.activateUPort}>Activate uPort</button></p>
+
     }
     return (
       <div>
@@ -34,8 +39,6 @@ var FrontPage = React.createClass({
       <br />
         {offline_msg} <br />
         <br />
-        <Link to={'/tokensearch'}>Interact with an already deployed Token Contract</Link> <br />
-        <Link to={'/factory'}>Create Tokens</Link> <br />
         </p>
       </div>
     );
