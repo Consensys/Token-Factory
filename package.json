@@ -28,12 +28,13 @@
     "reflux-tx": "0.2.4",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
-    "uport-lib": "git+ssh://git@github.com:ConsenSys/uport-lib.git",
+    "uport-lib": "^1.3.1",
     "web3": "0.16.0",
     "webpack": "^1.12.12"
   },
   "devDependencies": {
     "async": "*",
+    "babel-preset-es2015": "^6.18.0",
     "babel-runtime": "^6.3.19",
     "bluebird": "*",
     "file-loader": "^0.8.5",

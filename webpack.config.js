@@ -36,12 +36,9 @@ module.exports = {
     loaders: [
       //{ test: /\.(js|jsx|es6)$/, exclude: /node_modules/, include: [/reflux-tx/], loader: "babel-loader"},
       { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
-      { test: /\.(js|jsx|es6)$/, exclude: /node_modules/, loader: "babel-loader"},
+      { test: /\.(js|jsx|es6)$/, exclude: /node_modules(?!\/uport-lib)/, loader: "babel-loader"},
       //localforage excluded due to "loose" option in babelrc being changed in babel 6.
       //https://github.com/mozilla/localForage/issues/496
-      //{ test: /\.(js|jsx|es6)$/, exclude: [/localforage/, /ipfs-api\/node_modules/, /lodash/], loader: "babel-loader"},
-      //{ test: /\.(js|jsx|es6)$/, exclude: [/localforage/, /lodash/, /web3/], loader: "babel-loader"},
-      //{ test: /\.(js|jsx|es6)$/, exclude: [path.resolve(__dirname, "node_modules/reflux-tx/node_modules/localforaghh"), path.resolve(__dirname, "node_modules/react-account-badge/node_modules/ipfs-api"), /lodash/], loader: "babel-loader"},
       //{ test: /\.(jsx|es6)$/, loader: "babel-loader"},
       //{ test: /\.(js|jsx|es6)$/, loader: "babel-loader"},
       //{ test: /localforage\/dist\/localforage\.js/, loader: 'exports?localforage'},

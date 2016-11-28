@@ -21,12 +21,15 @@ var FrontPage = React.createClass({
     location.reload(); //refresh
   },
   render: function() {
+    /*
+    <h3 style={{textAlign: "center"}}>OR</h3>
+    <button style={{textAlign: "center"}} className="btn btn-default center-block" onClick={this.activateUPort}>Activate uPort</button></p>
+    */
     if(window.offline) {
       var offline_msg = <p style={{textAlign: "center"}}>You are currently OFFLINE. <br /><br />
       In order to use the Token Factory, you need to: <br />
     <a style={{textAlign: "center"}} href="https://metamask.io"><img width="200px" className="logo img-responsive center-block" src="./images/mm.png"></img></a>
-      <h3 style={{textAlign: "center"}}>OR</h3>
-      <button style={{textAlign: "center"}} className="btn btn-default center-block" onClick={this.activateUPort}>Activate uPort</button></p>
+    </p>
 
     }
     return (
