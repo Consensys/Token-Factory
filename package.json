@@ -28,6 +28,7 @@
     "reflux-tx": "0.2.4",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "truffle-hdwallet-provider": "0.0.3",
     "uport-lib": "^1.3.1",
     "web3": "0.16.0",
     "webpack": "^1.12.12"
