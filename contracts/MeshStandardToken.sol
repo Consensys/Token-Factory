@@ -34,7 +34,7 @@ contract MeshStandardToken is StandardToken {
     string public symbol;                 //An identifier: eg SBX
     string public version = 'M0.1';       //mesh 0.1 standard. Just an arbitrary versioning scheme.
 
-    function HumanStandardToken(
+    function MeshStandardToken(
         uint256 _initialAmount,
         string _tokenName,
         uint8 _decimalUnits,
