@@ -11,6 +11,8 @@ Contracts & Tests are borrowed from Tokens repo. Using Truffle (with Webpack). T
 ## Developing
 
 ```npm install```   
+```npm install -g webpack```
+```npm install -g truffle```
 ```truffle serve```
 
 ## Contributing
