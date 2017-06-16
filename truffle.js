@@ -1,11 +1,9 @@
 module.exports = {
-  "build": "webpack",
-  "deploy": [
-    "HumanStandardToken"
-  ],
-  "rpc": {
-    // Default RPC configuration.
-    "host": "localhost",
-    "port": 8545
+  networks: {
+    development: {
+      host: "localhost",
+      port: 8545,
+      network_id: "*" // Match any network id
+    }
   }
-}
+};
