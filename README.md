@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ConsenSys/Token-Factory)
+
 ## Token Factory
 
 The Token Factory allows simple creation of a standard ERC20 token on Ethereum. It requires an injected web3 (Mist or Metamask) to function. It also has uPort support.
