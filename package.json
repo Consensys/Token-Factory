@@ -9,18 +9,18 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "bluebird": "^3.1.5",
-    "bootstrap": "3.4.1",
+    "bootstrap": "3.3.6",
     "bootstrap-webpack": "0.0.5",
-    "copy-webpack-plugin": "^2.0.0",
-    "css-loader": "^1.0.0",
+    "copy-webpack-plugin": "^1.1.1",
+    "css-loader": "^0.23.1",
     "ether-pudding": "^2.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "font-awesome": "4.5.0",
-    "history": "1.14.0",
+    "history": "1.13.x",
     "imports-loader": "^0.6.5",
-    "jquery": "3.5.0",
+    "jquery": "1.11.3",
     "json-loader": "^0.5.4",
-    "node-sass": "^4.13.1",
+    "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-mixin": "^3.0.5",
@@ -30,8 +30,7 @@
     "style-loader": "^0.13.0",
     "uport-lib": "^1.3.1",
     "web3": "0.16.0",
-    "webpack": "^2.2.0",
-    "snyk": "^1.522.0"
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
     "async": "*",
@@ -53,10 +52,5 @@
       "email": "simon@delarouviere.com",
       "url": "https://github.com/simondlr"
     }
-  ],
-  "scripts": {
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
-  },
-  "snyk": true
+  ]
 }
