@@ -11,12 +11,12 @@
     "bluebird": "^3.1.5",
     "bootstrap": ">=3.4.1",
     "bootstrap-webpack": "0.0.5",
-    "copy-webpack-plugin": "^1.1.1",
-    "css-loader": "^0.23.1",
+    "copy-webpack-plugin": "^2.0.0",
+    "css-loader": "^1.0.0",
     "ether-pudding": "^2.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "font-awesome": "4.5.0",
-    "history": "1.13.x",
+    "history": "1.14.0",
     "imports-loader": "^0.6.5",
     "jquery": ">=3.5.0",
     "json-loader": "^0.5.4",
@@ -30,7 +30,7 @@
     "style-loader": "^0.13.0",
     "uport-lib": "^1.3.1",
     "web3": "0.16.0",
-    "webpack": "^4.0.0"
+    "webpack": "^5.0.0"
   },
   "devDependencies": {
     "async": "*",
