@@ -119,7 +119,7 @@ contract ERC20Token is StandardToken {
         balances[msg.sender] = 1000000000000000;               // Give the creator all initial tokens (100000 for example)
         totalSupply = 1000000000000000;                        // Update total supply (100000 for example)
         name = "Electronic Benefits Token";                                   // Set the name for display purposes
-        decimals = 18;                            // Amount of decimals for display purposes
+        decimals = 15;                            // Amount of decimals for display purposes
         symbol = "EBT";                               // Set the symbol for display purposes
     }
 
